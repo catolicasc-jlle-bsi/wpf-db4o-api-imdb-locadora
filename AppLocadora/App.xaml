@@ -1,0 +1,8 @@
+﻿<Application x:Class="AppLocadora.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="View/Layout/Application.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

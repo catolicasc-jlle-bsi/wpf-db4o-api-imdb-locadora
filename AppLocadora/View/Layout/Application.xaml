@@ -1,0 +1,53 @@
+﻿<Window x:Class="AppLocadora.View.Layout.Application"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Application" Width="1024" Height="768">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Name="menuPrincipal" Height="25" VerticalAlignment="Top">
+            
+            <MenuItem Header="_Locadora " >
+                <MenuItem Header="_Locar" Name="miLocar" Click="miLocar_Click"/>
+                <MenuItem Header="_Sair" Name="miSair" Click="miSair_Click"/>
+            </MenuItem>
+            
+            <MenuItem Header="_Filme">
+                <MenuItem Header="_Cadastro Auxiliar">
+                        <MenuItem Header="_Ator" Name="miAtor" Click="miAtor_Click"/>
+                        <MenuItem Header="_Diretor" Name="miDiretor" Click="miDiretor_Click"/>
+                        <MenuItem Header="_Genero" Name="miGenero" Click="miGenero_Click"/>
+                        <MenuItem Header="_Censura" Name="miCensura" Click="miCensura_Click"/>
+                        <MenuItem Header="_Credito" Name="miCredito" Click="miCredito_Click"/>
+                    </MenuItem>
+                <MenuItem Header="_Novo" Name="miNovoFilme" Click="miNovoFilme_Click"/>
+                <MenuItem Header="_Pesquisar" Name="miPesquisarFilme" Click="miPesquisarFilme_Click"/>
+                <MenuItem Header="_Listar" Name="miListarFilme" Click="miListarFilme_Click"/>
+            </MenuItem>
+            
+            <MenuItem Header="_Cliente">
+                <MenuItem Header="_Cadastro Auxiliar">
+                    <MenuItem Header="_Endereco" Name="miEndereco" Click="miEndereco_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Novo" Name="miNovoCliente" Click="miNovoCliente_Click"/>
+                <MenuItem Header="_Pesquisar" Name="miPesquisarCliente" Click="miPesquisarCliente_Click"/>
+                <!-- Implementar na tela de pesquisa o acesso a conta do cliente -->
+            </MenuItem>
+
+            <MenuItem Header="_Configuração">
+                <MenuItem Header="_Integração IMDB">
+                    <MenuItem Header="_Pesquisar Filme" Name="miPesquisar_Filme" Click="miPesquisar_Filme_Click"/>
+                    <MenuItem Header="_Sincronizar" Name="miSincronizar" Click="miSincronizar_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Definir Proxy" Name="miDefinirProxy" Click="miDefinirProxy_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="_Sobre" Name="miSobre" Click="miSobre_Click"/>
+        </Menu>
+        <Frame Grid.Row="1" x:Name="framePrincipal" NavigationUIVisibility="Hidden"
+               JournalOwnership="OwnsJournal">
+        </Frame>
+    </Grid>
+</Window>

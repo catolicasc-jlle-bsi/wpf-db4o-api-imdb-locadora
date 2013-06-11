@@ -1,0 +1,120 @@
+﻿<Page x:Class="AppLocadora.View.Diretor.Create"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:h="clr-namespace:AppLocadora.Helper"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800">
+
+    <Grid>
+        <Border BorderThickness="2" BorderBrush="SteelBlue">
+            <StackPanel Height="470" Width="550">
+                <StackPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFD7D7D7" Offset="1"/>
+                        <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <Label Background="CadetBlue" Foreground="White" FontSize="12">CADASTRO DE DIRETOR</Label>
+
+                <StackPanel>
+                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                        <Label Width="105" HorizontalContentAlignment="Right">Nome (*):</Label>
+                        <TextBox Width="290">
+                            <TextBox.Text>
+                                <Binding Path="Nome">
+                                    <Binding.ValidationRules>
+                                        <h:CampoObrigatorio />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Height="28">
+                        <Label Width="105" HorizontalContentAlignment="Right">Vencedor do Oscar?</Label>
+                        <CheckBox Width="130">
+                            <CheckBox.IsChecked>
+                                <Binding Path="Premiado">
+                                </Binding>
+                            </CheckBox.IsChecked>
+                        </CheckBox>
+                    </WrapPanel>
+
+                    <WrapPanel Height="28">
+                        <Label Width="105" HorizontalContentAlignment="Right">Data de Nascimento:</Label>
+                        <DatePicker Width="130">
+                            <DatePicker.SelectedDate>
+                                <Binding Path="Nascimento">
+                                </Binding>
+                            </DatePicker.SelectedDate>
+                        </DatePicker>
+                    </WrapPanel>
+
+                    <WrapPanel Height="28">
+                        <Label Width="105" HorizontalContentAlignment="Right">Sexo:</Label>
+                        <ComboBox Name="cbSexo" Width="130" DisplayMemberPath="Descricao">
+                            <ComboBox.SelectedValue>
+                                <Binding Path="Sexo">
+                                </Binding>
+                            </ComboBox.SelectedValue>
+                        </ComboBox>
+                    </WrapPanel>
+
+                    <!--ENDEREÇO-->
+
+                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                        <Label Width="105" HorizontalContentAlignment="Right">CEP:</Label>
+                        <TextBox Width="290">
+                            <TextBox.Text>
+                                <Binding Path="CEP">
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                        <Label Width="105" HorizontalContentAlignment="Right">Rua:</Label>
+                        <TextBox Width="290">
+                            <TextBox.Text>
+                                <Binding Path="Rua">
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                        <Label Width="105" HorizontalContentAlignment="Right">Bairro:</Label>
+                        <TextBox Width="290">
+                            <TextBox.Text>
+                                <Binding Path="Bairro">
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                        <Label Width="105" HorizontalContentAlignment="Right">Numero:</Label>
+                        <TextBox Width="290">
+                            <TextBox.Text>
+                                <Binding Path="Numero">
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </WrapPanel>
+
+                    <!--ENDEREÇO-->
+
+                </StackPanel>
+                <Label Margin="25,0,0,0">(*)Campos obrigatórios</Label>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <Button IsDefault="True" TabIndex="13" Name="btnSalvar" Margin="10,5,10,5" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="76" Click="btnSalvar_Click">_Salvar</Button>
+                    <Button IsCancel="True" TabIndex="14" Name="btnCancelar" Margin="10,5,10,5" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Click="btnCancelar_Click">_Cancelar</Button>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
