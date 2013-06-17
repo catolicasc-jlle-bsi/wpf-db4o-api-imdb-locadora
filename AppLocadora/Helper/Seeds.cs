@@ -23,10 +23,10 @@ namespace AppLocadora.Helper
 
             /*
             StoreUsuario();
-            StoreCensura();
             StoreGenero();
             StoreDiretor();
             StoreAtor();*/
+            StoreCensura();
             StoreSexo();
             
             

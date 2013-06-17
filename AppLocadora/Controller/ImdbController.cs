@@ -107,5 +107,35 @@ namespace AppLocadora.Controller
 
             return this.Valid(imdb);
         }
+
+        public List<Imdb> SearchAllByMovieName(string param)
+        {
+            List<Imdb> imdb;
+            string json = null;
+
+            try
+            {
+                json = Session.Current.Internet.Down(string.Format(_address_by_movie_title, param));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Erro desconhecido. Detalhes: {0}", ex.Message));
+            }
+
+            if (json.Contains("Film not found")) { throw new Exception("Nenhum filme encontrado com o nome procurado!"); };
+
+            try
+            {
+                imdb = JsonConvert.DeserializeObject<List<Imdb>>(json);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Erro desconhecido. Detalhes: {0}", ex.Message));
+            }
+
+            List<Imdb> validImdb = new List<Imdb>();
+            imdb.ForEach(i => validImdb.Add(this.Valid(i)));
+            return validImdb;
+        }
     }
 }

@@ -24,7 +24,6 @@ namespace AppLocadora.View.Imdb
     /// </summary>
     public partial class Find : Page
     {
-        private string _address = @"http://imdbapi.org/?title={0}&type=json&plot=simple&episode=0&limit=10&yg=0&mt=M&lang=en-US&offset=&aka=simple&release=simple&business=0&tech=0";
         private string _pesquisa = String.Empty;
         private BackgroundWorker _backgroundWorker = new BackgroundWorker();
 
@@ -53,20 +52,39 @@ namespace AppLocadora.View.Imdb
 
         private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            string content = Session.Current.Internet.Down(string.Format(_address, _pesquisa));
-            e.Result = JsonConvert.DeserializeObject<List<Model.Imdb>>(content);
+            e.Result = new ImdbController().SearchAllByMovieName(_pesquisa);
         }
 
         private void Refresh(List<Model.Imdb> imdb)
         {
             lbImdb.ItemsSource = imdb;
-            //Implementar focus no último item da lista
         }
 
-        private void btnInserirFilme_Click(object sender, RoutedEventArgs e)
+        private void btnCadastrarFilme_Click(object sender, RoutedEventArgs e)
         {
             Model.Imdb imdb = (sender as FrameworkElement).DataContext as Model.Imdb;
-            new ImdbController().Save(imdb);
+            Model.Filme foundMovie = new FilmeController().Cast(imdb);
+            this.NavigationService.Navigate(new View.Filme.Create(foundMovie));
+            this.NavigationService.RemoveBackEntry();
         }
+
+        #region Actions
+        private void tbPesquisa_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbPesquisa.Text = string.Empty;
+            tbPesquisa.FontStyle = FontStyles.Normal;
+            tbPesquisa.Foreground = Brushes.Black;
+        }
+
+        private void tbPesquisa_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbPesquisa.Text == string.Empty)
+            {
+                tbPesquisa.Text = "Nome do Filme...";
+                tbPesquisa.FontStyle = FontStyles.Italic;
+                tbPesquisa.Foreground = Brushes.DarkGray;
+            }
+        }
+        #endregion
     }
 }

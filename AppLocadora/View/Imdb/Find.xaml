@@ -9,8 +9,10 @@
 
         <DataTemplate x:Key="Template">
             <WrapPanel>
-                <TextBlock Text="{Binding Title}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Left" Width="400"/>
-                <Button Content="Inserir" Padding="0" Name="btnInserirFilme" VerticalAlignment="Center" Width="400" Click="btnInserirFilme_Click"/>
+                <TextBlock Text="{Binding Title}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Left" Width="200"/>
+                <TextBlock Text="{Binding Year}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center" Width="120"/>
+                <TextBlock Text="{Binding PlotSimple}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Left" Width="280"/>
+                <Button Content="Cadastrar Filme" Padding="0" Name="btnCadastrarFilme" VerticalAlignment="Center" Width="100" Click="btnCadastrarFilme_Click"/>
             </WrapPanel>
         </DataTemplate>
 
@@ -18,17 +20,20 @@
 
     <Grid>
         <StackPanel Margin="10">
-            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBox Name="tbPesquisa" Width="300" Margin="5"/>
-                <Button Name="btnPesquisarFilme" Content="Pesquisar" Height="30" Width="100" Click="btnPesquisarFilme_Click"/>
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <TextBox Name="tbPesquisa" Width="400" Margin="0,0,20,0" Text="Nome do Filme..." FontStyle="Italic" Foreground="DarkGray" GotFocus="tbPesquisa_GotFocus" LostFocus="tbPesquisa_LostFocus" />
+                <Button Name="btnPesquisarFilme" Focusable="True" Content="Pesquisar no IMDB" Width="180" Click="btnPesquisarFilme_Click"/>
             </StackPanel>
 
             <StackPanel Orientation="Vertical">
                 <StackPanel Margin="10,0,10,0" Orientation="Vertical">
-                    <StackPanel Margin="0,15,0,0" Height="25" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Width="760">
+                    <StackPanel Margin="0,15,0,0" Height="25" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Width="700">
                         <Label Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="200" Background="Gray" Foreground="White" FontWeight="Bold">Título</Label>
+                        <Label Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="120" Background="Gray" Foreground="White" FontWeight="Bold">Ano Lançamento</Label>
+                        <Label Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="280" Background="Gray" Foreground="White" FontWeight="Bold">Sinopse</Label>
+                        <Label Width="100"></Label>
                     </StackPanel>
-                    <ListBox Name="lbImdb" Focusable="False" TabIndex="1" Height="400" ItemsSource="{Binding}" SelectionMode="Single" Width="760" ItemTemplate="{StaticResource Template}" HorizontalAlignment="Center"/>
+                    <ListBox Name="lbImdb" Focusable="False" TabIndex="1" Height="400" ItemsSource="{Binding}" SelectionMode="Single" Width="700" ItemTemplate="{StaticResource Template}" HorizontalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
             
