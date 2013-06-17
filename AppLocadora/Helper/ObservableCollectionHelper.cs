@@ -12,5 +12,12 @@ namespace AppLocadora.Helper
         {
             return new ObservableCollection<T>(original);
         }
+
+        public static List<T> SelectedObjects<T>(ObservableCollection<SelectableObject<T>> param)
+        {
+            return (from c in param
+                    where c.IsSelected
+                    select c.ObjectData).ToList<T>();
+        }
     }
 }

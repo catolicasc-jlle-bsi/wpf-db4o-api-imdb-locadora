@@ -7,8 +7,7 @@ namespace AppLocadora.Model
 {
     public class Formato
     {
-        //Implementar no Seeds
-        public string Descricao { get; set; } //DVD, BluRay
+        public string Descricao { get; set; }
         public Credito Credito { get; set; }
     }
 }

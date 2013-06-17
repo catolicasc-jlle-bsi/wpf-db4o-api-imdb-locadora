@@ -8,10 +8,7 @@ namespace AppLocadora.Model
     public class Credito
     {
         public string Descricao { get; set; }
-
-        // Alterar no Seeds
         public decimal Valor { get; set; }
-
         public int QuantidadeDias { get; set; }
     }
 }

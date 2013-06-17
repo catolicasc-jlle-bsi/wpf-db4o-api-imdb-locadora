@@ -7,7 +7,7 @@ namespace AppLocadora.Model
 {
     public class Copia
     {
-        // Implementar no Seeds
+        public Guid ID { get; set; }
         public Formato Formato { get; set; }
     }
 }

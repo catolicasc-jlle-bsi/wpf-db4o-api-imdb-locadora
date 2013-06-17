@@ -10,8 +10,6 @@
         <DataTemplate x:Key="Template">
             <WrapPanel>
                 <TextBlock Text="{Binding Nome}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Left" Width="200"/>
-                <TextBlock Text="{Binding Nome}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Left" Width="200"/>
-                
                 <TextBlock Text="{Binding Nascimento, StringFormat=dd/MM/yyyy}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center" Width="120"/>
                 <TextBlock Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center" Width="80">
                     <Button Name="btnEditar" Width="60" Content="Editar" Click="btnEditar_Click"/>

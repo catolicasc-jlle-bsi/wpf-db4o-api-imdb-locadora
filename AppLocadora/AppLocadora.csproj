@@ -73,6 +73,7 @@
     <Compile Include="Controller\CreditoController.cs" />
     <Compile Include="Controller\DiretorController.cs" />
     <Compile Include="Controller\EnderecoController.cs" />
+    <Compile Include="Controller\FormatoController.cs" />
     <Compile Include="Controller\GeneroController.cs" />
     <Compile Include="Controller\CopiaController.cs" />
     <Compile Include="Controller\FilmeController.cs" />
@@ -87,11 +88,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Helper\Downloader.cs" />
-    <Compile Include="Helper\GerenciadorProxy.cs" />
+    <Compile Include="Model\GerenciadorProxy.cs" />
     <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="Helper\LoggerLocadora.cs" />
     <Compile Include="Helper\ObservableCollectionHelper.cs" />
     <Compile Include="Helper\Seeds.cs" />
+    <Compile Include="Helper\SelectableAdvancedObject.cs" />
     <Compile Include="Helper\SelectableObject.cs" />
     <Compile Include="Helper\SelectableObjectHelper.cs" />
     <Compile Include="Model\Configuration.cs" />

@@ -7,11 +7,6 @@ namespace AppLocadora.Model
 {
     public class Conta
     {
-        public int Saldo { get; private set; }
-
-        public void AdicionarCredito(int credito)
-        {
-            this.Saldo += credito;
-        }
+        public int Saldo { get; set; }
     }
 }

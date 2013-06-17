@@ -11,16 +11,8 @@ namespace AppLocadora.Controller
     public class ApplicationController
     {
         public ApplicationController()
-        {
-
+        { 
             new Seeds();
-        }
-
-        public List<T> SelectedObjects<T>(ObservableCollection<SelectableObject<T>> param)
-        {
-            return (from c in param
-                    where c.IsSelected
-                    select c.ObjectData).ToList<T>();
         }
     }
 }

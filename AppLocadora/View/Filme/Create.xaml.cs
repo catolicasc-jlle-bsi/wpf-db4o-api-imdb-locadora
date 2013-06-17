@@ -27,11 +27,15 @@ namespace AppLocadora.View.Filme
     /// </summary>
     public partial class Create : Page
     {
+        #region Fields
         private ObservableCollection<SelectableObject<Model.Genero>> _collectionGeneros;
         private ObservableCollection<SelectableObject<Model.Diretor>> _collectionDiretores;
         private ObservableCollection<SelectableObject<Model.Ator>> _collectionAtores;
         private ObservableCollection<SelectableObject<Model.Roteirista>> _collectionRoteiristas;
+        private ObservableCollection<SelectableAdvancedObject<int, Model.Copia>> _collectionCopias;
+        #endregion
 
+        #region Constructor
         public Create(Model.Filme filme = null)
         {
             InitializeComponent();
@@ -44,26 +48,10 @@ namespace AppLocadora.View.Filme
             {
                 this.ReloadMovie(filme, true);
             }
-
-            //var atorA = new Model.Ator { Nome = "Guareschi", };
-
-            /*
-            var file = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "no_picture.gif");
-            MemoryStream byteStream = new MemoryStream(file);
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.StreamSource = byteStream;
-            image.EndInit();
-            imgCapa.Source = image;
-            */
-            //var ator = new AtorController().First<Model.Ator>();
-            //File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + "1.wmv", ator.File);
-
-
-            //imgCapa.DataContext = System.IO.Path.GetFullPath("Images/no_picture.gif");
-            //imgCapa.DataContext = System.IO.Path.GetDirectoryName("Images/no_picture.gif");
         }
+        #endregion
 
+        #region Methods
         private void ReloadMovie(Model.Filme movie, bool isReload = false)
         {
             if (!isReload)
@@ -72,7 +60,7 @@ namespace AppLocadora.View.Filme
                 _collectionDiretores = new SelectableObjectHelper().Cast(new GeneroController().SelectAll<Model.Diretor>());
                 _collectionAtores = new SelectableObjectHelper().Cast(new GeneroController().SelectAll<Model.Ator>());
                 _collectionRoteiristas = new SelectableObjectHelper().Cast(new GeneroController().SelectAll<Model.Roteirista>());
-                imgCapa.Source = new ImageHelper().ByteToBitmapImage(new ConfigurationController().First<Model.Configuration>().DefaultPoster); ;
+                this.LoadImage(new ImageHelper().ByteToBitmapImage(new ConfigurationController().First<Model.Configuration>().DefaultPoster));
             }
             else
             {
@@ -80,100 +68,26 @@ namespace AppLocadora.View.Filme
                 _collectionDiretores = new SelectableObjectHelper().Cast(movie.Diretores, true);
                 _collectionAtores = new SelectableObjectHelper().Cast(movie.Atores, true);
                 _collectionRoteiristas = new SelectableObjectHelper().Cast(movie.Roteiristas, true);
-                imgCapa.Source = new ImageHelper().ByteToBitmapImage(movie.Capa);
+                this.LoadImage(new ImageHelper().ByteToBitmapImage(movie.Capa));
             }
+            //_collectionCopias = new SelectableObjectHelper().Cast(new CopiaController().HelpComboBox());
 
             cbGeneros.ItemsSource = _collectionGeneros;
             cbDiretor.ItemsSource = _collectionDiretores;
             cbRoteirista.ItemsSource = _collectionRoteiristas;
             cbAtor.ItemsSource = _collectionAtores;
             cbCensura.ItemsSource = new CensuraController().SelectAll<Model.Censura>();
+
+            cbGenerosItem_Checked(null, null);
+            cbDiretorItem_Checked(null, null);
+            cbAtorItem_Checked(null, null);
+            cbRoteiristaItem_Checked(null, null);
+
             this.DataContext = movie;
         }
+        #endregion
 
-        private void RefreshControls()
-        {
-            /*
-            BindingExpression tb = this.tbNome.GetBindingExpression(TextBox.TextProperty);
-            tb.UpdateSource();
-            
-            BindingExpression cb = this.cbEstado.GetBindingExpression(ComboBox.SelectedValueProperty);
-            cb.UpdateSource();*/
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            /*
-             
-            Model.Genero genero = cbGenero.SelectedItem as Model.Genero;
-            Model.Censura censura = cbCensura.SelectedItem as Model.Censura;
-            Model.Diretor diretor = cbDiretor.SelectedItem as Model.Diretor;
-            Model.Ator ator = cbAtor.SelectedItem as Model.Ator;
-             
-             */
-
-            //DEBUG
-
-            /*
-            RefreshControls();
-            Model.Filme filme = this.Resources["Filme"] as Model.Filme;
-
-            var atores = lvAtores.SelectedItems;
-            filme.Atores = new List<Model.Ator>();
-
-            foreach (var ator in atores) { filme.Atores.Add(ator as Model.Ator); }
-
-            new FilmeController().Save(filme);
-            */
-
-            /*
-            IObjectContainer db = ConnectionFactory.Create();
-            Model.Filme filme = new FilmeController().Last<Model.Filme>(db);
-            db.Close();*/
-
-        }
-
-        private void btnSalvar_Click(object sender, RoutedEventArgs e)
-        {
-            Model.Filme filme = this.DataContext as Model.Filme;
-            filme.Censura = cbCensura.SelectedItem as Model.Censura;
-            filme.Generos = new ApplicationController().SelectedObjects<Model.Genero>(_collectionGeneros);
-            filme.Diretores = new ApplicationController().SelectedObjects<Model.Diretor>(_collectionDiretores);
-            filme.Atores = new ApplicationController().SelectedObjects<Model.Ator>(_collectionAtores);
-            filme.Roteiristas = new ApplicationController().SelectedObjects<Model.Roteirista>(_collectionRoteiristas);
-
-            new FilmeController().Save(filme);
-        }
-
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void OnCbObjectCheckBoxChecked(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (SelectableObject<Model.Genero> cbObject in cbGeneros.Items)
-                if (cbObject.IsSelected)
-                    sb.AppendFormat("{0}, ", cbObject.ObjectData.Descricao);
-            cbGeneros.Text = sb.ToString().Trim().TrimEnd(',');
-        }
-
-        private void Generic_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-            comboBox.SelectedItem = null;
-        }
-
-        private void imgCapa_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.Filter = "Image Files|*.jpg;*.gif;*.bmp;*.png;*.jpeg|All Files|*.*";
-
-            if (openDialog.ShowDialog().Value)
-                imgCapa.Source = new ImageHelper().ByteToBitmapImage(File.ReadAllBytes(openDialog.FileName));
-        }
-
+        #region Integração com o IMDB
         private void btnVerificarIMDB_Click(object sender, RoutedEventArgs e)
         {
             Model.Filme foundMovie;
@@ -190,5 +104,124 @@ namespace AppLocadora.View.Filme
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
+
+        #region Actions
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            Model.Filme filme = this.DataContext as Model.Filme;
+            filme.Censura = cbCensura.SelectedItem as Model.Censura;
+            filme.Generos = ObservableCollectionHelper.SelectedObjects<Model.Genero>(_collectionGeneros);
+            filme.Diretores = ObservableCollectionHelper.SelectedObjects<Model.Diretor>(_collectionDiretores);
+            filme.Atores = ObservableCollectionHelper.SelectedObjects<Model.Ator>(_collectionAtores);
+            filme.Roteiristas = ObservableCollectionHelper.SelectedObjects<Model.Roteirista>(_collectionRoteiristas);
+
+            new FilmeController().Save(filme);
+            this.ReturnIndex();
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.ReturnIndex();
+        }
+
+        private void ReturnIndex()
+        {
+            this.NavigationService.Navigate(new View.Filme.Index());
+            this.NavigationService.RemoveBackEntry();
+        }
+        #endregion
+
+        #region Tratamento de Validações
+        private void RefreshControls()
+        {
+
+            BindingExpression tb = this.tbNome.GetBindingExpression(TextBox.TextProperty);
+            tb.UpdateSource();
+
+            /*
+            BindingExpression cb = this.cbEstado.GetBindingExpression(ComboBox.SelectedValueProperty);
+            cb.UpdateSource();*/
+        }
+        #endregion
+
+        #region Tratamento para a Image
+        private void LoadImage(ImageSource param)
+        {
+            try
+            {
+                imgCapa.Source = param;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void imgCapa_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "Image Files|*.jpg;*.gif;*.bmp;*.png;*.jpeg|All Files|*.*";
+
+            if (openDialog.ShowDialog().Value)
+                imgCapa.Source = new ImageHelper().ByteToBitmapImage(File.ReadAllBytes(openDialog.FileName));
+        }
+        #endregion
+
+        #region Tratamento para o ComboBox
+        private void cbGenerosItem_Checked(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (SelectableObject<Model.Genero> p in cbGeneros.Items)
+                if (p.IsSelected)
+                    sb.AppendFormat("{0}, ", p.ObjectData.Descricao);
+            tbGeneros.Text = sb.ToString().Trim().TrimEnd(',');
+        }
+
+        private void cbDiretorItem_Checked(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (SelectableObject<Model.Diretor> p in cbDiretor.Items)
+                if (p.IsSelected)
+                    sb.AppendFormat("{0}, ", p.ObjectData.Nome);
+            tbDiretor.Text = sb.ToString().Trim().TrimEnd(',');
+        }
+
+        private void cbRoteiristaItem_Checked(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (SelectableObject<Model.Roteirista> p in cbRoteirista.Items)
+                if (p.IsSelected)
+                    sb.AppendFormat("{0}, ", p.ObjectData.Nome);
+            tbRoteirista.Text = sb.ToString().Trim().TrimEnd(',');
+        }
+
+        private void cbAtorItem_Checked(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (SelectableObject<Model.Ator> p in cbAtor.Items)
+                if (p.IsSelected)
+                    sb.AppendFormat("{0}, ", p.ObjectData.Nome);
+            tbAtor.Text = sb.ToString().Trim().TrimEnd(',');
+        }
+
+        private void cbCopiaItem_Checked(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (SelectableObject<Model.Copia> p in cbCopia.Items)
+                if (p.IsSelected)
+                    sb.AppendFormat("{0}, ", p.ObjectData.Formato.Descricao);
+            tbCopia.Text = sb.ToString().Trim().TrimEnd(',');
+        }
+
+        #region Evento Genérico
+        private void Generic_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            comboBox.SelectedItem = null;
+        }
+        #endregion       
+        #endregion
+
     }
 }

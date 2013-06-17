@@ -31,13 +31,6 @@ namespace AppLocadora.Controller
         private byte[] Cast(string url)
         {
             return Session.Current.Internet.DownBytes(url);
-            /*
-            var atorA = new Model.Ator { Nome = "Guareschi", };
-            atorA.File = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "Wildlife.wmv");
-            new AtorController().Save(atorA);
-
-            var ator = new AtorController().First<Model.Ator>();
-            File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + "1.wmv", ator.File);*/
         }
     }
 }

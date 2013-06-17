@@ -11,63 +11,47 @@ namespace AppLocadora.Helper
 {
     public class Seeds
     {
-        private IObjectContainer _database;
-
         public Seeds()
         {
-            //this.StoreConfiguration();
-            //return;
-
             if (File.Exists(ConnectionDBFactory.PATH))
             {
                 return;
             }
 
-            _database = Session.Current.Database;
+            StoreProxy();
+            StoreConfiguration();
 
+            /*
             StoreUsuario();
             StoreCensura();
-            StoreCredito();
             StoreGenero();
             StoreDiretor();
-            StoreAtor();
+            StoreAtor();*/
             StoreSexo();
-            this.StoreConfiguration();
+            
+            
+            //StoreFormato();
+        }
+
+        private void StoreProxy()
+        {
+            new BasicOperations().Save(new GerenciadorProxy { Active = false, Endereco = string.Empty, Porta = string.Empty });
         }
 
         private void StoreConfiguration()
         {
-            /*
-            String temp = String.Format("{0}.Images.{1}", "AppLocadora", "no_picture.gif");
-            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(temp); 
-            */
-            /*
-            var t = Resources.ResourceManager;
-
-            var _myNameSpace = "ConsoleApplication10";
-
-            String temp = String.Format("{0}.Files.{1}", _myNameSpace, assemblyNames.Value);
-
-            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(temp); 
-            */
-
-            Configuration configuration = new Configuration
-            {
-                DefaultPoster = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "no_picture.gif"),
-            };
-
-            new BasicOperations().Save(configuration);
+            new BasicOperations().Save(new Configuration { DefaultPoster = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "no_picture.gif")});
         }
 
-        private void StoreUsuario()
+        private void StoreSexo()
         {
-            Usuario usuario = new Usuario
+            List<Sexo> sexos = new List<Sexo>()
             {
-                Login = "admin",
-                Password = "admin",
+                new Sexo { Descricao = "M" },
+                new Sexo { Descricao = "F" },
             };
 
-            new BasicOperations().Save(usuario);
+            sexos.ToList().ForEach(c => new BasicOperations().Save(c));
         }
 
         private void StoreCensura()
@@ -83,20 +67,6 @@ namespace AppLocadora.Helper
             };
 
             censuras.ToList().ForEach(c => new BasicOperations().Save(c));
-        }
-
-        private void StoreCredito()
-        {
-            List<Credito> creditos = new List<Credito>()
-            {
-                new Credito { Valor = 1 },
-                new Credito { Valor = 2 },
-                new Credito { Valor = 3 },
-                new Credito { Valor = 4 },
-                new Credito { Valor = 5 },
-            };
-
-            creditos.ToList().ForEach(c => new BasicOperations().Save(c));
         }
 
         private void StoreGenero()
@@ -195,15 +165,78 @@ namespace AppLocadora.Helper
             atores.ToList().ForEach(c => new BasicOperations().Save(c));
         }
 
-        private void StoreSexo()
+        #region Não usado
+
+        private void StoreUsuario()
         {
-            List<Sexo> sexos = new List<Sexo>()
+            Usuario usuario = new Usuario
             {
-                new Sexo { Descricao = "M" },
-                new Sexo { Descricao = "F" },
+                Login = "admin",
+                Password = "admin",
             };
 
-            sexos.ToList().ForEach(c => new BasicOperations().Save(c));
+            new BasicOperations().Save(usuario);
         }
+
+        private void StoreFormato()
+        {
+            List<Formato> formato = new List<Formato>()
+            {
+                new Formato
+                {
+                    Descricao = "DVD",
+                    Credito = new Credito { Valor = 1, Descricao = "1", QuantidadeDias = 5 },
+                },
+                new Formato
+                {
+                    Descricao = "DVD",
+                    Credito = new Credito { Valor = 2, Descricao = "2", QuantidadeDias = 4 },
+                },
+                new Formato
+                {
+                    Descricao = "DVD",
+                    Credito = new Credito { Valor = 3, Descricao = "3", QuantidadeDias = 3 },
+                },
+                new Formato
+                {
+                    Descricao = "DVD",
+                    Credito = new Credito { Valor = 4, Descricao = "4", QuantidadeDias = 2 },
+                },
+                new Formato
+                {
+                    Descricao = "DVD",
+                    Credito = new Credito { Valor = 5, Descricao = "5", QuantidadeDias = 1 },
+                },
+                new Formato
+                {
+                    Descricao = "Blu-ray",
+                    Credito = new Credito { Valor = 2, Descricao = "1", QuantidadeDias = 5 },
+                },
+                new Formato
+                {
+                    Descricao = "Blu-ray",
+                    Credito = new Credito { Valor = 4, Descricao = "2", QuantidadeDias = 4 },
+                },
+                new Formato
+                {
+                    Descricao = "Blu-ray",
+                    Credito = new Credito { Valor = 8, Descricao = "3", QuantidadeDias = 3 },
+                },
+                new Formato
+                {
+                    Descricao = "Blu-ray",
+                    Credito = new Credito { Valor = 10, Descricao = "4", QuantidadeDias = 2 },
+                },
+                new Formato
+                {
+                    Descricao = "Blu-ray",
+                    Credito = new Credito { Valor = 12, Descricao = "5", QuantidadeDias = 1 },
+                },
+            };
+
+            new BasicOperations().Save(formato);
+        }
+
+        #endregion
     }
 }

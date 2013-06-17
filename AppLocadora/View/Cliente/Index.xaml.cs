@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AppLocadora.Controller;
 
 namespace AppLocadora.View.Cliente
 {
@@ -22,6 +23,26 @@ namespace AppLocadora.View.Cliente
         public Index()
         {
             InitializeComponent();
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            lbAtores.ItemsSource = new ClienteController().SelectAll<Model.Cliente>();
+        }
+
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+            Model.Cliente cliente = (sender as FrameworkElement).DataContext as Model.Cliente;
+            this.NavigationService.Navigate(new View.Cliente.Create(cliente));
+            this.NavigationService.RemoveBackEntry();
+        }
+
+        private void btnExcluir_Click(object sender, RoutedEventArgs e)
+        {
+            Model.Cliente cliente = (sender as FrameworkElement).DataContext as Model.Cliente;
+            new ClienteController().Delete(cliente);
+            Refresh();
         }
     }
 }

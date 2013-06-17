@@ -11,6 +11,8 @@ namespace AppLocadora.Helper
     {
         public BitmapImage ByteToBitmapImage(byte[] param)
         {
+            if (param.Length == 0) { throw new Exception("Falha ao carregar a imagem: Imagem inexistente!"); };
+
             MemoryStream byteStream = new MemoryStream(param);
             BitmapImage image = new BitmapImage();
             image.BeginInit();

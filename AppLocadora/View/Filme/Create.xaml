@@ -30,7 +30,7 @@
                     <StackPanel Grid.Column="1">
                         <WrapPanel Height="28" Margin="0,5,0,0" >
                             <Label Width="105" HorizontalContentAlignment="Right">Nome (*):</Label>
-                            <TextBox Width="300">
+                            <TextBox Name="tbNome" Width="300">
                                 <TextBox.Text>
                                     <Binding Path="Nome">
                                         <Binding.ValidationRules>
@@ -70,25 +70,8 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                        </WrapPanel>
-
-                        <WrapPanel Height="28">
-                            <Label Width="105" HorizontalContentAlignment="Right">Gêneros :</Label>
-                            <ComboBox Name="cbGeneros" Width="200" SelectionChanged="Generic_SelectionChanged" Text="" IsEditable="False" IsEnabled="True" ItemStringFormat="">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <CheckBox IsChecked="{Binding IsSelected}" Width="20" Checked="OnCbObjectCheckBoxChecked" Unchecked="OnCbObjectCheckBoxChecked"  />
-                                            <TextBlock Text="{Binding ObjectData.Descricao}" Width="190" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </WrapPanel>
-
-                        <WrapPanel Height="28">
                             <Label Width="105" HorizontalContentAlignment="Right">Censura :</Label>
-                            <ComboBox Name="cbCensura" Width="130" DisplayMemberPath="Classificacao">
+                            <ComboBox Name="cbCensura" Width="80" Margin="1" DisplayMemberPath="Classificacao">
                                 <ComboBox.SelectedValue>
                                     <Binding Path="Censura">
                                     </Binding>
@@ -96,95 +79,119 @@
                             </ComboBox>
                         </WrapPanel>
 
-                        <WrapPanel Height="28">
-                            <Label Width="105" HorizontalContentAlignment="Right">Diretores :</Label>
-                            <ComboBox Name="cbDiretor" Width="300">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="105"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Gêneros :</Label>
+                            <ComboBox Grid.Column="1" Grid.Row="0" Margin="2" Name="cbGeneros" SelectionChanged="Generic_SelectionChanged">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <CheckBox IsChecked="{Binding IsSelected}" Width="20" />
+                                            <CheckBox Name="cbGenerosItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbGenerosItem_Checked" Unchecked="cbGenerosItem_Checked"/>
+                                            <TextBlock Text="{Binding ObjectData.Descricao}" Width="190" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Name="tbGeneros" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="105"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Diretores :</Label>
+                            <ComboBox Name="cbDiretor" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <CheckBox Name="cbDiretorItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbDiretorItem_Checked" Unchecked="cbDiretorItem_Checked"/>
                                             <TextBlock Text="{Binding ObjectData.Nome}" Width="190" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                        </WrapPanel>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Name="tbDiretor" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
+                        </Grid>
 
-                        <WrapPanel Height="28">
-                            <Label Width="105" HorizontalContentAlignment="Right">Roteiristas :</Label>
-                            <ComboBox Name="cbRoteirista" Width="300">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="105"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Roteiristas :</Label>
+                            <ComboBox Name="cbRoteirista" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <CheckBox IsChecked="{Binding IsSelected}" Width="20" />
+                                            <CheckBox Name="cbRoteiristaItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbRoteiristaItem_Checked" Unchecked="cbRoteiristaItem_Checked"/>
                                             <TextBlock Text="{Binding ObjectData.Nome}" Width="190" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                        </WrapPanel>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Name="tbRoteirista" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
+                        </Grid>
 
-                        <WrapPanel Height="28">
-                            <Label Width="105" HorizontalContentAlignment="Right">Atores :</Label>
-                            <ComboBox Name="cbAtor" Width="300">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="105"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Atores :</Label>
+                            <ComboBox Name="cbAtor" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <CheckBox IsChecked="{Binding IsSelected}" Width="20" />
+                                            <CheckBox Name="cbAtorItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbAtorItem_Checked" Unchecked="cbAtorItem_Checked"/>
                                             <TextBlock Text="{Binding ObjectData.Nome}" Width="190" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                        </WrapPanel>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Name="tbAtor" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
+                        </Grid>
 
-                        <!--ENDEREÇO
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="105"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Cópias :</Label>
+                            <ComboBox Name="cbCopia" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <CheckBox Name="cbCopiaItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbCopiaItem_Checked" Unchecked="cbCopiaItem_Checked"/>
+                                            <TextBlock Text="{Binding ObjectData.Formato.Descricao}" Width="190" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Name="tbCopia" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
+                        </Grid>
 
-                    <WrapPanel Height="28" Margin="0,5,0,0" >
-                        <Label Width="105" HorizontalContentAlignment="Right">CEP:</Label>
-                        <TextBox Width="290">
-                            <TextBox.Text>
-                                <Binding Path="Nome">
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                    </WrapPanel>
-
-                    <WrapPanel Height="28" Margin="0,5,0,0" >
-                        <Label Width="105" HorizontalContentAlignment="Right">Rua:</Label>
-                        <TextBox Width="290">
-                            <TextBox.Text>
-                                <Binding Path="Rua">
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                    </WrapPanel>
-
-                    <WrapPanel Height="28" Margin="0,5,0,0" >
-                        <Label Width="105" HorizontalContentAlignment="Right">Bairro:</Label>
-                        <TextBox Width="290">
-                            <TextBox.Text>
-                                <Binding Path="Bairro">
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                    </WrapPanel>
-
-                    <WrapPanel Height="28" Margin="0,5,0,0" >
-                        <Label Width="105" HorizontalContentAlignment="Right">Numero:</Label>
-                        <TextBox Width="290">
-                            <TextBox.Text>
-                                <Binding Path="Numero">
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                    </WrapPanel>
-
-                    ENDEREÇO-->
-
+                        <Label Margin="0,2,0,2" FontWeight="Bold">(*)Campos obrigatórios</Label>
                     </StackPanel>
                 </Grid>
-                <Label Margin="25,0,0,0">(*)Campos obrigatórios</Label>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
                     <Button IsDefault="True" TabIndex="13" Name="btnSalvar" Margin="10,5,10,5" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="76" Click="btnSalvar_Click">_Salvar</Button>

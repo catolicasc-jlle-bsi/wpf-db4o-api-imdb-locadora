@@ -1,7 +1,7 @@
 ﻿<Window x:Class="AppLocadora.View.Layout.Application"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Application" Width="1024" Height="768">
+        Title="Application" Width="800" Height="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -23,17 +23,17 @@
                         <MenuItem Header="_Credito" Name="miCredito" Click="miCredito_Click"/>
                     </MenuItem>
                 <MenuItem Header="_Novo" Name="miNovoFilme" Click="miNovoFilme_Click"/>
-                <MenuItem Header="_Pesquisar" Name="miPesquisarFilme" Click="miPesquisarFilme_Click"/>
+                <!-- <MenuItem Header="_Pesquisar" Name="miPesquisarFilme" Click="miPesquisarFilme_Click"/> -->
                 <MenuItem Header="_Listar" Name="miListarFilme" Click="miListarFilme_Click"/>
             </MenuItem>
             
             <MenuItem Header="_Cliente">
-                <MenuItem Header="_Cadastro Auxiliar">
-                    <MenuItem Header="_Endereco" Name="miEndereco" Click="miEndereco_Click"/>
-                </MenuItem>
+                <!-- <MenuItem Header="_Cadastro Auxiliar">
+                    <MenuItem Header="_Endereco" Name="miEndereco" Click="miEndereco_Click"/> 
+                </MenuItem> -->
                 <MenuItem Header="_Novo" Name="miNovoCliente" Click="miNovoCliente_Click"/>
-                <MenuItem Header="_Pesquisar" Name="miPesquisarCliente" Click="miPesquisarCliente_Click"/>
-                <!-- Implementar na tela de pesquisa o acesso a conta do cliente -->
+                <!-- <MenuItem Header="_Pesquisar" Name="miPesquisarCliente" Click="miPesquisarCliente_Click"/> -->
+                <MenuItem Header="_Listar" Name="miListarCliente" Click="miListarCliente_Click"/>
             </MenuItem>
 
             <MenuItem Header="_Configuração">

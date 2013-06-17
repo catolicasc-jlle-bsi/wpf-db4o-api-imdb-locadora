@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using AppLocadora.Controller;
 using System.IO;
+using AppLocadora.Model;
 
 namespace AppLocadora.Helper
 {
@@ -12,21 +13,17 @@ namespace AppLocadora.Helper
     {
         public ConnectionInternetFactory Create()
         {
-            //GerenciadorProxy gp = new GerenciadorProxyController().Single<GerenciadorProxy>();
+            GerenciadorProxy gp = new GerenciadorProxyController().Single<GerenciadorProxy>();
 
-            
-            GerenciadorProxy gp = new GerenciadorProxy
-            {
-                Endereco = "192.168.21.130",
-                Porta = "8080",
-            };
-            
-             
             if (gp != null)
             {
-                Proxy = new WebProxy(string.Format("http://{0}:{1}", gp.Endereco, gp.Porta));
-                Proxy.Credentials = CredentialCache.DefaultCredentials;
+                if (gp.Active)
+                {
+                    Proxy = new WebProxy(string.Format("http://{0}:{1}", gp.Endereco, gp.Porta));
+                    Proxy.Credentials = CredentialCache.DefaultCredentials;
+                }
             }
+
             return this;
         }
 

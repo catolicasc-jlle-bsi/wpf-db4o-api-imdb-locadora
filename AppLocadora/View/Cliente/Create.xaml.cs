@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AppLocadora.Controller;
 
 namespace AppLocadora.View.Cliente
 {
@@ -19,9 +20,35 @@ namespace AppLocadora.View.Cliente
     /// </summary>
     public partial class Create : Page
     {
-        public Create()
+        public Create(Model.Cliente cliente = null)
         {
             InitializeComponent();
+            cbSexo.ItemsSource = new SexoController().SelectAll<Model.Sexo>();
+
+            if (cliente == null)
+            {
+                cliente = new Model.Cliente { Conta = new Model.Conta(), };
+            }
+
+            this.DataContext = cliente;
+        }
+
+        private void ReturnIndex()
+        {
+            this.NavigationService.Navigate(new View.Cliente.Index());
+            this.NavigationService.RemoveBackEntry();
+        }
+
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            Model.Cliente cliente = this.DataContext as Model.Cliente;
+            new ClienteController().Save(cliente);
+            ReturnIndex();
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            ReturnIndex();
         }
     }
 }

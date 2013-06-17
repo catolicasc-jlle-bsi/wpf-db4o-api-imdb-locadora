@@ -75,11 +75,13 @@ namespace AppLocadora.View.Layout
             framePrincipal.NavigationService.RemoveBackEntry();
         }
 
+        /*
         private void miPesquisarFilme_Click(object sender, RoutedEventArgs e)
         {
             framePrincipal.Navigate(new View.Filme.Find());
             framePrincipal.NavigationService.RemoveBackEntry();
         }
+        */
 
         private void miListarFilme_Click(object sender, RoutedEventArgs e)
         {
@@ -99,9 +101,17 @@ namespace AppLocadora.View.Layout
             framePrincipal.NavigationService.RemoveBackEntry();
         }
 
+        /*
         private void miPesquisarCliente_Click(object sender, RoutedEventArgs e)
         {
             framePrincipal.Navigate(new View.Cliente.Find());
+            framePrincipal.NavigationService.RemoveBackEntry();
+        }
+        */
+        
+        private void miListarCliente_Click(object sender, RoutedEventArgs e)
+        {
+            framePrincipal.Navigate(new View.Cliente.Index());
             framePrincipal.NavigationService.RemoveBackEntry();
         }
 

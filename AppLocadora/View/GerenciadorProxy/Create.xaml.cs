@@ -23,26 +23,13 @@ namespace AppLocadora.View.GerenciadorProxy
         public Create()
         {
             InitializeComponent();
-            Helper.GerenciadorProxy gp = new GerenciadorProxyController().First<Helper.GerenciadorProxy>();
-            this.DataContext = gp ?? new Helper.GerenciadorProxy();
-        }
-
-        private void ReturnIndex()
-        {
-            //this.NavigationService.Navigate(new View.Ator.Index());
-            //this.NavigationService.RemoveBackEntry();
+            this.DataContext = new GerenciadorProxyController().Single<Model.GerenciadorProxy>();
         }
 
         private void btnSalvar_Click(object sender, RoutedEventArgs e)
         {
-            Helper.GerenciadorProxy gp = this.DataContext as Helper.GerenciadorProxy;
+            Model.GerenciadorProxy gp = this.DataContext as Model.GerenciadorProxy;
             new GerenciadorProxyController().Save(gp);
-            ReturnIndex();
-        }
-
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
-        {
-            ReturnIndex();
         }
     }
 }

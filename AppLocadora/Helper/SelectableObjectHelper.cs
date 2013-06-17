@@ -16,5 +16,13 @@ namespace AppLocadora.Helper
 
             return new ObservableCollectionHelper().Convert<SelectableObject<T>>(so);
         }
+
+        public ObservableCollection<SelectableAdvancedObject<T1, T2>> Cast<T1, T2>(IDictionary<T1, T2> param)
+        {
+            List<SelectableAdvancedObject<T1, T2>> so = new List<SelectableAdvancedObject<T1, T2>>();
+            param.ToList().ForEach(p => so.Add(new SelectableAdvancedObject<T1, T2>(p.Key, p.Value)));
+
+            return new ObservableCollectionHelper().Convert<SelectableAdvancedObject<T1, T2>>(so);
+        }
     }
 }

@@ -7,6 +7,6 @@ namespace AppLocadora.Model
 {
     public class Cliente : Pessoa
     {
-        public Conta Conta { get; private set; }
+        public Conta Conta { get; set; }
     }
 }
