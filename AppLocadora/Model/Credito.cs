@@ -10,5 +10,6 @@ namespace AppLocadora.Model
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
         public int QuantidadeDias { get; set; }
+        public Formato Formato { get; set; }
     }
 }

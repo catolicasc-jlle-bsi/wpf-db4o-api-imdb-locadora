@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AppLocadora.Controller;
+using AppLocadora.Helper;
 
 namespace AppLocadora.View.GerenciadorProxy
 {
@@ -30,6 +31,8 @@ namespace AppLocadora.View.GerenciadorProxy
         {
             Model.GerenciadorProxy gp = this.DataContext as Model.GerenciadorProxy;
             new GerenciadorProxyController().Save(gp);
+
+            Session.Current.Internet = new ConnectionInternetFactory().Create();
         }
     }
 }

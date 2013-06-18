@@ -27,5 +27,16 @@ namespace AppLocadora.Controller
 
         }
 
+        /*
+        public Dictionary<Model.Filme, List<Model.Copia>> Search(string param)
+        {
+            var allMovies = new FilmeController().SearchAllMoviesByName(param);
+            if (allMovies == null) throw new Exception("Nenhum filme encontrado!");
+
+            Dictionary<Model.Filme, List<Model.Copia>> dicMovies = new Dictionary<Model.Filme, List<Model.Copia>>();
+            allMovies.ToList().ForEach(f => dicMovies.Add(f, new CopiaController().SelectAllCopiasByMovie(f).ToList()));
+            return dicMovies;
+        }*/
+
     }
 }

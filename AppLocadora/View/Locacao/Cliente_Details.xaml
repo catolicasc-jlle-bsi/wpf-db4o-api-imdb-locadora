@@ -1,9 +1,8 @@
-﻿<Page x:Class="AppLocadora.View.Cliente.Create"
+﻿<Page x:Class="AppLocadora.View.Locacao.Cliente_Details"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:h="clr-namespace:AppLocadora.Helper"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800">
 
@@ -16,17 +15,14 @@
                         <GradientStop Color="#FFFFFFFF" Offset="0"/>
                     </LinearGradientBrush>
                 </StackPanel.Background>
-                <Label Background="CadetBlue" Foreground="White" FontSize="12">CADASTRO DE CLIENTE</Label>
+                <Label Background="CadetBlue" Foreground="White" FontSize="12">DETALHES DO CLIENTE</Label>
 
                 <StackPanel>
                     <WrapPanel Height="28" Margin="0,5,0,0" >
-                        <Label Width="105" HorizontalContentAlignment="Right">Nome (*):</Label>
+                        <Label Width="105" HorizontalContentAlignment="Right">Nome:</Label>
                         <TextBox Width="290">
                             <TextBox.Text>
                                 <Binding Path="Nome">
-                                    <Binding.ValidationRules>
-                                        <h:CampoObrigatorio />
-                                    </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
@@ -58,7 +54,7 @@
                         <Label Width="105" HorizontalContentAlignment="Right">CEP:</Label>
                         <TextBox Width="290">
                             <TextBox.Text>
-                                <Binding Path="Endereco.CEP">
+                                <Binding Path="CEP">
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
@@ -68,7 +64,7 @@
                         <Label Width="105" HorizontalContentAlignment="Right">Rua:</Label>
                         <TextBox Width="290">
                             <TextBox.Text>
-                                <Binding Path="Endereco.Rua">
+                                <Binding Path="Rua">
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
@@ -78,7 +74,7 @@
                         <Label Width="105" HorizontalContentAlignment="Right">Bairro:</Label>
                         <TextBox Width="290">
                             <TextBox.Text>
-                                <Binding Path="Endereco.Bairro">
+                                <Binding Path="Bairro">
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
@@ -88,7 +84,7 @@
                         <Label Width="105" HorizontalContentAlignment="Right">Numero:</Label>
                         <TextBox Width="290">
                             <TextBox.Text>
-                                <Binding Path="Endereco.Numero">
+                                <Binding Path="Numero">
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
@@ -107,11 +103,10 @@
                     </WrapPanel>
 
                 </StackPanel>
-                <Label Margin="25,0,0,0">(*)Campos obrigatórios</Label>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                    <Button IsDefault="True" TabIndex="13" Name="btnSalvar" Margin="10,5,10,5" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="76" Click="btnSalvar_Click">_Salvar</Button>
-                    <Button IsCancel="True" TabIndex="14" Name="btnCancelar" Margin="10,5,10,5" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Click="btnCancelar_Click">_Cancelar</Button>
+                    <Button IsDefault="True" TabIndex="13" Name="btnSelecionar" Margin="10,5,10,5" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="76" Click="btnSelecionar_Click">_Selecionar</Button>
+                    <Button IsCancel="True" TabIndex="14" Name="btnVoltar" Margin="10,5,10,5" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Click="btnVoltar_Click">_Voltar</Button>
                 </StackPanel>
 
             </StackPanel>

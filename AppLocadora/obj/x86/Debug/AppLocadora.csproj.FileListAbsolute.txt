@@ -65,3 +65,11 @@ C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaD
 C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\AppLocadora.csproj.GenerateResource.Cache
 C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\AppLocadora.exe
 C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\AppLocadora.pdb
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Cliente_Details.baml
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Cliente_List.baml
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Cliente_Details.g.cs
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Cliente_List.g.cs
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Filme_Details.baml
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Filme_List.baml
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Filme_Details.g.cs
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Filme_List.g.cs

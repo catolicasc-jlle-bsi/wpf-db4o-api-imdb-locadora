@@ -173,6 +173,18 @@
     <Compile Include="View\Filme\Show.xaml.cs">
       <DependentUpon>Show.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Locacao\Cliente_Details.xaml.cs">
+      <DependentUpon>Cliente_Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Locacao\Cliente_List.xaml.cs">
+      <DependentUpon>Cliente_List.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Locacao\Filme_Details.xaml.cs">
+      <DependentUpon>Filme_Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Locacao\Filme_List.xaml.cs">
+      <DependentUpon>Filme_List.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Locacao\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
@@ -282,6 +294,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Filme\Show.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Locacao\Cliente_Details.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Locacao\Cliente_List.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Locacao\Filme_Details.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Locacao\Filme_List.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

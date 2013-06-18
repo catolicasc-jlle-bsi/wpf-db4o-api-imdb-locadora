@@ -5,6 +5,7 @@ using System.Text;
 using AppLocadora.Helper;
 using AppLocadora.Model;
 using Db4objects.Db4o;
+using Db4objects.Db4o.Linq;
 
 namespace AppLocadora.Controller
 {
@@ -15,17 +16,26 @@ namespace AppLocadora.Controller
             return Guid.NewGuid();
         }
 
-        public Dictionary<int, Copia> HelpComboBox()
+        public List<Copia> Generate(Dictionary<List<Model.Formato>, Model.Credito> param)
         {
-            int qtdeDefault = 5;
-            Dictionary<int, Copia> copias = new Dictionary<int, Copia>();
-
-            var formatos = new FormatoController().SelectAll<Formato>().ToList();
-
-            for (int control = 1; control <= qtdeDefault; control++)
-                formatos.ForEach(f => copias.Add(control, new Copia { Formato = f, }));
+            List<Copia> copias = new List<Copia>();
+            foreach (var copia in param)
+            {
+                foreach (var formato in copia.Key)
+                {
+                    copias.Add(new Copia(copia.Value));
+                }
+            }
 
             return copias;
+        }
+
+        public IEnumerable<Copia> SelectAllCopiasByMovie(Filme movie)
+        {
+            IQueryable<Filme> query = _database.AsQueryable<Filme>();
+            return (from q in query
+                    where q == movie
+                    select q.Copias).SingleOrDefault();
         }
     }
 }

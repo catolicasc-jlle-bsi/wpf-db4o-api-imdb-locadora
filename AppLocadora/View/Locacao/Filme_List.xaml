@@ -1,4 +1,4 @@
-﻿<Page x:Class="AppLocadora.View.Filme.Index"
+﻿<Page x:Class="AppLocadora.View.Locacao.Filme_List"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,8 +13,8 @@
                 <TextBlock Text="{Binding Nome}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Left" Width="200"/>
                 <TextBlock Text="{Binding AnoLancamento}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center" Width="120"/>
                 <TextBlock Text="{Binding Sinopse}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Left" Width="280"/>
-                <Button Name="btnEditar" Width="60" Content="Editar" Click="btnEditar_Click"/>
-                <Button Name="btnExcluir" Width="60" Content="Excluir" Click="btnExcluir_Click"/>
+                <Button Name="btnSelecionar" Width="60" Content="Selecionar" Click="btnSelecionar_Click"/>
+                <Button Name="btnDetalhes" Width="60" Content="Detalhes" Click="btnDetalhes_Click"/>
             </WrapPanel>
         </DataTemplate>
 
@@ -33,3 +33,4 @@
         </StackPanel>
     </Grid>
 </Page>
+

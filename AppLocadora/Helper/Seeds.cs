@@ -9,38 +9,34 @@ using System.Reflection;
 
 namespace AppLocadora.Helper
 {
-    public class Seeds
+    public class Seeds : BasicOperations
     {
         public Seeds()
         {
-            if (File.Exists(ConnectionDBFactory.PATH))
-            {
-                return;
-            }
+            if (SelectAll<GerenciadorProxy>().Count() == 0)
+                StoreProxy();
 
-            StoreProxy();
-            StoreConfiguration();
+            if (SelectAll<Configuration>().Count() == 0)
+                StoreConfiguration();
 
-            /*
-            StoreUsuario();
-            StoreGenero();
-            StoreDiretor();
-            StoreAtor();*/
-            StoreCensura();
-            StoreSexo();
-            
-            
-            //StoreFormato();
+            if (SelectAll<Censura>().Count() == 0)
+                StoreCensura();
+
+            if (SelectAll<Sexo>().Count() == 0)
+                StoreSexo();
+
+            if (SelectAll<Credito>().Count() == 0)
+                StoreCredito();
         }
 
         private void StoreProxy()
         {
-            new BasicOperations().Save(new GerenciadorProxy { Active = false, Endereco = string.Empty, Porta = string.Empty });
+            Save(new GerenciadorProxy { Active = false, Endereco = string.Empty, Porta = string.Empty });
         }
 
         private void StoreConfiguration()
         {
-            new BasicOperations().Save(new Configuration { DefaultPoster = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "no_picture.gif")});
+            Save(new Configuration { DefaultPoster = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "no_picture.gif") });
         }
 
         private void StoreSexo()
@@ -51,7 +47,7 @@ namespace AppLocadora.Helper
                 new Sexo { Descricao = "F" },
             };
 
-            sexos.ToList().ForEach(c => new BasicOperations().Save(c));
+            sexos.ToList().ForEach(c => Save(c));
         }
 
         private void StoreCensura()
@@ -66,9 +62,35 @@ namespace AppLocadora.Helper
                 new Censura { Classificacao = "18" },
             };
 
-            censuras.ToList().ForEach(c => new BasicOperations().Save(c));
+            censuras.ToList().ForEach(c => Save(c));
         }
 
+        private void StoreCredito()
+        {
+            List<Credito> creditosDVD = new List<Credito>()
+            {
+                new Credito { Valor = 1, Descricao = "DVD 1", QuantidadeDias = 5, Formato = Formato.DVD },
+                new Credito { Valor = 2, Descricao = "DVD 2", QuantidadeDias = 4, Formato = Formato.DVD },
+                new Credito { Valor = 3, Descricao = "DVD 3", QuantidadeDias = 3, Formato = Formato.DVD },
+                new Credito { Valor = 4, Descricao = "DVD 4", QuantidadeDias = 2, Formato = Formato.DVD },
+                new Credito { Valor = 5, Descricao = "DVD 5", QuantidadeDias = 1, Formato = Formato.DVD },
+            };
+
+            creditosDVD.ForEach(c => Save(c));
+
+            List<Credito> creditosBluray = new List<Credito>()
+            {
+                new Credito { Valor = 2, Descricao = "Bluray 1", QuantidadeDias = 5, Formato = Formato.Bluray },
+                new Credito { Valor = 4, Descricao = "Bluray 2", QuantidadeDias = 4, Formato = Formato.Bluray },
+                new Credito { Valor = 6, Descricao = "Bluray 3", QuantidadeDias = 3, Formato = Formato.Bluray },
+                new Credito { Valor = 8, Descricao = "Bluray 4", QuantidadeDias = 2, Formato = Formato.Bluray },
+                new Credito { Valor = 10, Descricao = "Bluray 5", QuantidadeDias = 1, Formato = Formato.Bluray },
+            };
+
+            creditosBluray.ForEach(c => Save(c));
+        }
+
+        #region Sem conexão com a Internet
         private void StoreGenero()
         {
             List<Genero> generos = new List<Genero>()
@@ -164,9 +186,9 @@ namespace AppLocadora.Helper
 
             atores.ToList().ForEach(c => new BasicOperations().Save(c));
         }
+        #endregion
 
         #region Não usado
-
         private void StoreUsuario()
         {
             Usuario usuario = new Usuario
@@ -175,68 +197,8 @@ namespace AppLocadora.Helper
                 Password = "admin",
             };
 
-            new BasicOperations().Save(usuario);
+            Save(usuario);
         }
-
-        private void StoreFormato()
-        {
-            List<Formato> formato = new List<Formato>()
-            {
-                new Formato
-                {
-                    Descricao = "DVD",
-                    Credito = new Credito { Valor = 1, Descricao = "1", QuantidadeDias = 5 },
-                },
-                new Formato
-                {
-                    Descricao = "DVD",
-                    Credito = new Credito { Valor = 2, Descricao = "2", QuantidadeDias = 4 },
-                },
-                new Formato
-                {
-                    Descricao = "DVD",
-                    Credito = new Credito { Valor = 3, Descricao = "3", QuantidadeDias = 3 },
-                },
-                new Formato
-                {
-                    Descricao = "DVD",
-                    Credito = new Credito { Valor = 4, Descricao = "4", QuantidadeDias = 2 },
-                },
-                new Formato
-                {
-                    Descricao = "DVD",
-                    Credito = new Credito { Valor = 5, Descricao = "5", QuantidadeDias = 1 },
-                },
-                new Formato
-                {
-                    Descricao = "Blu-ray",
-                    Credito = new Credito { Valor = 2, Descricao = "1", QuantidadeDias = 5 },
-                },
-                new Formato
-                {
-                    Descricao = "Blu-ray",
-                    Credito = new Credito { Valor = 4, Descricao = "2", QuantidadeDias = 4 },
-                },
-                new Formato
-                {
-                    Descricao = "Blu-ray",
-                    Credito = new Credito { Valor = 8, Descricao = "3", QuantidadeDias = 3 },
-                },
-                new Formato
-                {
-                    Descricao = "Blu-ray",
-                    Credito = new Credito { Valor = 10, Descricao = "4", QuantidadeDias = 2 },
-                },
-                new Formato
-                {
-                    Descricao = "Blu-ray",
-                    Credito = new Credito { Valor = 12, Descricao = "5", QuantidadeDias = 1 },
-                },
-            };
-
-            new BasicOperations().Save(formato);
-        }
-
         #endregion
     }
 }

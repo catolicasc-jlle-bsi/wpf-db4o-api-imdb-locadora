@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AppLocadora.Helper;
 using AppLocadora.Model;
+using Db4objects.Db4o.Linq;
 
 namespace AppLocadora.Controller
 {
@@ -26,6 +27,15 @@ namespace AppLocadora.Controller
                     Atores = new AtorController().Cast(imdb.Actors),
                     Capa = Cast(imdb.Poster), 
                 };
+        }
+
+        public IEnumerable<Filme> SearchAllMoviesByName(string param)
+        {
+            IQueryable<Filme> query = _database.AsQueryable<Filme>();
+            return (from q in query
+                    where q.Nome.Contains(param)
+                    orderby q.Nome
+                    select q);
         }
 
         private byte[] Cast(string url)

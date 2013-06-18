@@ -3,11 +3,99 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:h="clr-namespace:AppLocadora.Helper"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-	Title="Index">
+      d:DesignHeight="600" d:DesignWidth="800">
 
     <Grid>
-        
+        <Border BorderThickness="2" BorderBrush="SteelBlue">
+            <StackPanel Height="580" Width="780">
+                <StackPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFD7D7D7" Offset="1"/>
+                        <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <Label Background="CadetBlue" Foreground="White" FontSize="12">LOCAÇÃO</Label>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <Image Margin="0,10,0,0" Height="180" Name="imgCapa" Width="180" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <WrapPanel Height="28" Margin="0,5,0,0" >
+                            <Label Width="105" HorizontalContentAlignment="Right">Cliente (*):</Label>
+                            <TextBox Name="tbCliente" Width="300">
+                                <TextBox.Text>
+                                    <Binding Path="Nome">
+                                        <Binding.ValidationRules>
+                                            <h:CampoObrigatorio />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button Margin="5,0,0,0" Name="btnSearchClient" Width="150" Content="Procurar Cliente" Click="btnSearchClient_Click"/>
+                        </WrapPanel>
+
+                        <!--
+                        <StackPanel Name="spCliente" Margin="40,5,0,0" Grid.Column="1" Visibility="Collapsed">
+                            <StackPanel Grid.Column="1">
+                                <Label Height="28" Content="{Binding Nome}"/>
+                                <Label Height="28" Content="{Binding Nascimento}"/>
+                                <Label Height="28" Content="{Binding Endereco.CEP}"/>
+                                <WrapPanel Height="28" Margin="0,5,0,0">
+                                    <Label Height="28" Width="100" Content="{Binding Endereco.Rua}"/>
+                                    <Label Height="28" Width="50" Content="{Binding Endereco.Numero}"/>
+                                    <Label Height="28" Width="100" Content="{Binding Endereco.Bairro}"/>
+                                </WrapPanel>
+                            </StackPanel>
+                        </StackPanel>
+                        -->
+
+                        <WrapPanel Height="28" Margin="0,5,0,0" >
+                            <Label Width="105" HorizontalContentAlignment="Right">Filme (*):</Label>
+                            <TextBox Name="tbFilme" Width="300">
+                                <TextBox.Text>
+                                    <Binding Path="Nome">
+                                        <Binding.ValidationRules>
+                                            <h:CampoObrigatorio />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button Margin="5,0,0,0" Name="btnSearchFilme" Width="150" Content="Procurar Filme" Click="btnSearchFilme_Click"/>
+                        </WrapPanel>
+
+                        <StackPanel Name="spCopias" Margin="0,5,0,0" Grid.Column="1" Visibility="Collapsed">
+                            <WrapPanel Height="28" Margin="0,5,0,0" >
+                                <Label Height="28">Cópias Disponíveis:</Label>
+                                <ComboBox Name="cbCopias" Width="300" Margin="1" DisplayMemberPath="ID">
+                                    <ComboBox.SelectedValue>
+                                        <Binding Path="Copia">
+                                        </Binding>
+                                    </ComboBox.SelectedValue>
+                                </ComboBox>
+                            </WrapPanel>
+                        </StackPanel>
+
+                        <Label Margin="0,2,0,2" FontWeight="Bold">(*)Campos obrigatórios</Label>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <Button IsDefault="True" TabIndex="13" Name="btnLocar" Margin="10,5,10,5" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="76" Click="btnLocar_Click">_Locar</Button>
+                    <Button IsCancel="True" TabIndex="14" Name="btnCancelar" Margin="10,5,10,5" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Click="btnCancelar_Click">_Cancelar</Button>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>
+
+

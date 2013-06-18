@@ -8,6 +8,12 @@ namespace AppLocadora.Model
     public class Copia
     {
         public Guid ID { get; set; }
-        public Formato Formato { get; set; }
+        public Credito Credito { get; set; }
+
+        public Copia(Credito credito)
+        {
+            this.ID = Guid.NewGuid();
+            this.Credito = credito;
+        }
     }
 }

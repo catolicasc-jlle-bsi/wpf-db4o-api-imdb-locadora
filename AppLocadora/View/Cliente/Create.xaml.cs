@@ -27,7 +27,11 @@ namespace AppLocadora.View.Cliente
 
             if (cliente == null)
             {
-                cliente = new Model.Cliente { Conta = new Model.Conta(), };
+                cliente = new Model.Cliente 
+                { 
+                    Endereco = new Model.Endereco(),
+                    Conta = new Model.Conta(), 
+                };
             }
 
             this.DataContext = cliente;

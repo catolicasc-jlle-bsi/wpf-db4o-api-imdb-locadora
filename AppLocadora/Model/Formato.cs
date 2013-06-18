@@ -5,9 +5,9 @@ using System.Text;
 
 namespace AppLocadora.Model
 {
-    public class Formato
+    public enum Formato
     {
-        public string Descricao { get; set; }
-        public Credito Credito { get; set; }
+        DVD,
+        Bluray,
     }
 }

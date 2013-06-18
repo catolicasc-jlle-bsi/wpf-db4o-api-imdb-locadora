@@ -28,7 +28,7 @@ namespace AppLocadora.View.Cliente
 
         private void Refresh()
         {
-            lbAtores.ItemsSource = new ClienteController().SelectAll<Model.Cliente>();
+            lbClientes.ItemsSource = new ClienteController().SelectAll<Model.Cliente>();
         }
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)

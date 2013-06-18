@@ -32,7 +32,6 @@ namespace AppLocadora.View.Filme
         private ObservableCollection<SelectableObject<Model.Diretor>> _collectionDiretores;
         private ObservableCollection<SelectableObject<Model.Ator>> _collectionAtores;
         private ObservableCollection<SelectableObject<Model.Roteirista>> _collectionRoteiristas;
-        private ObservableCollection<SelectableAdvancedObject<int, Model.Copia>> _collectionCopias;
         #endregion
 
         #region Constructor
@@ -68,15 +67,31 @@ namespace AppLocadora.View.Filme
                 _collectionDiretores = new SelectableObjectHelper().Cast(movie.Diretores, true);
                 _collectionAtores = new SelectableObjectHelper().Cast(movie.Atores, true);
                 _collectionRoteiristas = new SelectableObjectHelper().Cast(movie.Roteiristas, true);
-                this.LoadImage(new ImageHelper().ByteToBitmapImage(movie.Capa));
+                this.LoadImage(new ImageHelper().ByteToBitmapImage(movie.Capa));             
             }
-            //_collectionCopias = new SelectableObjectHelper().Cast(new CopiaController().HelpComboBox());
 
             cbGeneros.ItemsSource = _collectionGeneros;
             cbDiretor.ItemsSource = _collectionDiretores;
             cbRoteirista.ItemsSource = _collectionRoteiristas;
             cbAtor.ItemsSource = _collectionAtores;
             cbCensura.ItemsSource = new CensuraController().SelectAll<Model.Censura>();
+
+            cbCreditoDVD.ItemsSource = new CreditoController().SelectAllByFormato(Model.Formato.DVD);
+            cbCreditoBluray.ItemsSource = new CreditoController().SelectAllByFormato(Model.Formato.Bluray);
+
+            if (movie.Copias == null)
+            {
+                tbCopiasDVD.Text = 0.ToString();
+                tbCopiasBluray.Text = 0.ToString();
+            }
+            else
+            {
+                tbCopiasDVD.Text = movie.Copias.Where(w => w.Credito.Formato == Model.Formato.DVD).Count().ToString();
+                tbCopiasBluray.Text = movie.Copias.Where(w => w.Credito.Formato == Model.Formato.Bluray).Count().ToString();
+
+                cbCreditoDVD.SelectedItem = new CreditoController().SelectByFormato(Model.Formato.DVD, movie);
+                cbCreditoBluray.SelectedItem = new CreditoController().SelectByFormato(Model.Formato.Bluray, movie);
+            }       
 
             cbGenerosItem_Checked(null, null);
             cbDiretorItem_Checked(null, null);
@@ -115,9 +130,43 @@ namespace AppLocadora.View.Filme
             filme.Diretores = ObservableCollectionHelper.SelectedObjects<Model.Diretor>(_collectionDiretores);
             filme.Atores = ObservableCollectionHelper.SelectedObjects<Model.Ator>(_collectionAtores);
             filme.Roteiristas = ObservableCollectionHelper.SelectedObjects<Model.Roteirista>(_collectionRoteiristas);
+            filme.Copias = new CopiaController().Generate(this.HelperCopias());
 
             new FilmeController().Save(filme);
             this.ReturnIndex();
+        }
+
+        private Dictionary<List<Model.Formato>, Model.Credito> HelperCopias()
+        {
+            
+
+            Dictionary<List<Model.Formato>, Model.Credito> dicCopias = new Dictionary<List<Model.Formato>, Model.Credito>();
+
+            //Dictionary<int, Model.Credito> dicCopias = new Dictionary<int, Model.Credito>();
+
+            if (!string.IsNullOrEmpty(tbCopiasDVD.Text) && cbCreditoDVD.SelectedItem as Model.Credito != null)
+            {
+                List<Model.Formato> list = new List<Model.Formato>();
+                Model.Credito dvdCredito = cbCreditoDVD.SelectedItem as Model.Credito;
+                dvdCredito.Formato = Model.Formato.DVD;
+                for (int aux = 1; aux <= int.Parse(tbCopiasDVD.Text); aux++)
+                    list.Add(Model.Formato.DVD);
+
+                dicCopias.Add(list, dvdCredito);
+            }
+
+            if (!string.IsNullOrEmpty(tbCopiasBluray.Text) && cbCreditoBluray.SelectedItem as Model.Credito != null)
+            {
+                List<Model.Formato> list = new List<Model.Formato>();
+                Model.Credito blurayCredito = cbCreditoBluray.SelectedItem as Model.Credito;
+                blurayCredito.Formato = Model.Formato.Bluray;
+                for (int aux = 1; aux <= int.Parse(tbCopiasBluray.Text); aux++)
+                    list.Add(Model.Formato.Bluray);
+
+                dicCopias.Add(list, blurayCredito);
+            }
+
+            return dicCopias;
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -203,15 +252,6 @@ namespace AppLocadora.View.Filme
                 if (p.IsSelected)
                     sb.AppendFormat("{0}, ", p.ObjectData.Nome);
             tbAtor.Text = sb.ToString().Trim().TrimEnd(',');
-        }
-
-        private void cbCopiaItem_Checked(object sender, RoutedEventArgs e)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (SelectableObject<Model.Copia> p in cbCopia.Items)
-                if (p.IsSelected)
-                    sb.AppendFormat("{0}, ", p.ObjectData.Formato.Descricao);
-            tbCopia.Text = sb.ToString().Trim().TrimEnd(',');
         }
 
         #region Evento Genérico

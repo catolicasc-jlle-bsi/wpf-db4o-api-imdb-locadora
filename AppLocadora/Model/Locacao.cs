@@ -9,6 +9,7 @@ namespace AppLocadora.Model
 {
     public class Locacao
     {
+        /*
         public Locacao(Cliente cliente, Filme filme, Formato formato)
         {
             foreach (Copia copia in filme.Copias)
@@ -58,15 +59,16 @@ namespace AppLocadora.Model
 
             this.DataLocacao = DateTime.Now;
             this.DataPrevistaDevolucao = CalculaDataDevolucao();
-        }
-
+        }*/
+        /*
         public DateTime CalculaDataDevolucao()
         {
             DateTime devolucao = this.DataLocacao;
             devolucao.AddDays(this.Copia.Formato.Credito.QuantidadeDias);
             return devolucao;
-        }
+        }*/
 
+        public Filme Filme { get; set; }
         public Cliente Cliente { get; set; }
         public Copia Copia { get; set; }
 
