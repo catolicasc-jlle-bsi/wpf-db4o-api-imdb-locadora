@@ -24,7 +24,6 @@
 
     <Grid>
         <StackPanel Margin="10,0,10,0" Orientation="Vertical">
-            <Button Name="btnSincronizar" Width="100" Content="Sincronizar Dados" Click="btnSincronizar_Click"/> 
             <StackPanel Margin="0,15,0,0" Height="25" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Width="760">
                 <Label Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="200" Background="Gray" Foreground="White" FontWeight="Bold">Nome</Label>
                 <Label Padding="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="120" Background="Gray" Foreground="White" FontWeight="Bold">Data Nascimento</Label>

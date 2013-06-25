@@ -48,22 +48,5 @@ namespace AppLocadora.View.Ator
             new AtorController().Delete(ator);
             Refresh();
         }
-
-        private void btnSincronizar_Click(object sender, RoutedEventArgs e)
-        {
-            //new ImdbController().IntegrateWithDatabase();
-            /*
-            List<Model.Ator> actors = new ImdbController().SelectAllActors();
-            actors.ForEach(actor => new AtorController().Save(actor));
-            Refresh();
-            */
-            
-            var filme = new Model.Filme { Nome = "Frizzo muito louco", };
-            filme.Trailer = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "Wildlife.wmv");
-            new FilmeController().Save(filme);
-
-            var recup = new FilmeController().Last<Model.Filme>();
-            File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + "Frizzo doidao.wmv", recup.Trailer);
-        }
     }
 }

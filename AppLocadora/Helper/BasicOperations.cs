@@ -15,40 +15,84 @@ namespace AppLocadora.Helper
 
         public void Save(object x)
         {
-            _database.Store(x);
+            try
+            {
+                _database.Store(x);
+                _database.Commit();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public void Delete(object x)
         {
-            _database.Delete(x);
+            try
+            {
+                _database.Delete(x);
+                _database.Commit();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public T Single<T>()
         {
-            IQueryable<T> query = _database.AsQueryable<T>();
-            return (from q in query
-                    select q).SingleOrDefault<T>();
+            try
+            {
+                IQueryable<T> query = _database.AsQueryable<T>();
+                return (from q in query
+                        select q).SingleOrDefault<T>();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public IEnumerable<T> SelectAll<T>()
         {
-            IQueryable<T> query = _database.AsQueryable<T>();
-            return (from q in query
-                    select q).AsEnumerable<T>();
+            try
+            {
+                IQueryable<T> query = _database.AsQueryable<T>();
+                return (from q in query
+                        select q).AsEnumerable<T>();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public T First<T>()
         {
-            IQueryable<T> query = _database.AsQueryable<T>();
-            return (from q in query
-                    select q).FirstOrDefault<T>();
+            try
+            {
+                IQueryable<T> query = _database.AsQueryable<T>();
+                return (from q in query
+                        select q).FirstOrDefault<T>();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public T Last<T>()
         {
-            IQueryable<T> query = _database.AsQueryable<T>();
-            return (from q in query
-                    select q).LastOrDefault<T>();
+            try
+            {
+                IQueryable<T> query = _database.AsQueryable<T>();
+                return (from q in query
+                        select q).LastOrDefault<T>();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         /*

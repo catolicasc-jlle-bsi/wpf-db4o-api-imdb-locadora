@@ -67,7 +67,8 @@ namespace AppLocadora.View.Filme
                 _collectionDiretores = new SelectableObjectHelper().Cast(movie.Diretores, true);
                 _collectionAtores = new SelectableObjectHelper().Cast(movie.Atores, true);
                 _collectionRoteiristas = new SelectableObjectHelper().Cast(movie.Roteiristas, true);
-                this.LoadImage(new ImageHelper().ByteToBitmapImage(movie.Capa));             
+                this.LoadImage(new ImageHelper().ByteToBitmapImage(movie.Capa));
+                this.LoadVideo(movie.Trailer);
             }
 
             cbGeneros.ItemsSource = _collectionGeneros;
@@ -131,7 +132,9 @@ namespace AppLocadora.View.Filme
             filme.Atores = ObservableCollectionHelper.SelectedObjects<Model.Ator>(_collectionAtores);
             filme.Roteiristas = ObservableCollectionHelper.SelectedObjects<Model.Roteirista>(_collectionRoteiristas);
             filme.Copias = new CopiaController().Generate(this.HelperCopias());
-
+            filme.Capa = new ImageHelper().BitmapImageToByte((BitmapImage)imgCapa.Source);
+            filme.Trailer = this.SerializeVideo();
+            
             new FilmeController().Save(filme);
             this.ReturnIndex();
         }
@@ -197,6 +200,7 @@ namespace AppLocadora.View.Filme
         #region Tratamento para a Image
         private void LoadImage(ImageSource param)
         {
+            if (param == null) { return; }
             try
             {
                 imgCapa.Source = param;
@@ -215,6 +219,96 @@ namespace AppLocadora.View.Filme
             if (openDialog.ShowDialog().Value)
                 imgCapa.Source = new ImageHelper().ByteToBitmapImage(File.ReadAllBytes(openDialog.FileName));
         }
+        #endregion
+
+        #region Tratamento para o Video
+
+        private byte[] SerializeVideo()
+        {
+            return mediaPlayerMain.Source != null ?
+                new VideoHelper().PathToByte(mediaPlayerMain.Source.LocalPath) :
+                null;
+        }
+
+        /// <summary>
+        /// Stop media when ended
+        /// </summary>
+        private void mediaPlayerMain_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            mediaPlayerMain.Stop();
+        }
+
+        /// <summary>
+        /// Initialise UI elements based on current media item
+        /// </summary>
+        private void mediaPlayerMain_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            sliderVolume.IsEnabled = mediaPlayerMain.IsLoaded;
+        }
+
+        /// <summary>
+        /// stop the media playing
+        /// </summary>
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayerMain.Stop();
+        }
+
+        /// <summary>
+        /// pause the media playing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPause_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayerMain.Pause();
+        }
+
+        /// <summary>
+        /// play the media
+        /// </summary>
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayerMain.Play();
+            mediaPlayerMain.Volume = (double)sliderVolume.Value;
+        }
+
+        /// <summary>
+        /// change media volume to position (x)
+        /// </summary>
+        private void ChangeMediaVolume(object sender, RoutedPropertyChangedEventArgs<double> args)
+        {
+            mediaPlayerMain.Volume = (double)sliderVolume.Value;
+        }
+
+        private void LoadVideo(byte[] param)
+        {
+            if (param == null) { return; }
+            try
+            {
+                mediaPlayerMain.Source = new VideoHelper().ByteToPath(param);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnMediaPlayerMain_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openDialog = new Microsoft.Win32.OpenFileDialog();
+            openDialog.Filter = "Video Files|*.wmv;|All Files|*.*";
+
+            if (openDialog.ShowDialog().Value)
+            {
+                mediaPlayerMain.Source = null;
+                mediaPlayerMain.Source = new Uri(openDialog.FileName);
+                mediaPlayerBorder.Visibility = Visibility.Visible;
+                mediaPlayerMain.Play();
+                mediaPlayerMain.Volume = (double)sliderVolume.Value;
+            }
+        }
+       
         #endregion
 
         #region Tratamento para o ComboBox
@@ -261,7 +355,9 @@ namespace AppLocadora.View.Filme
             comboBox.SelectedItem = null;
         }
         #endregion       
+
         #endregion
 
     }
 }
+

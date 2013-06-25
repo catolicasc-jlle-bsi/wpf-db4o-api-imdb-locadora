@@ -13,6 +13,7 @@ namespace AppLocadora.Helper
     {
         public Seeds()
         {
+           
             if (SelectAll<GerenciadorProxy>().Count() == 0)
                 StoreProxy();
 

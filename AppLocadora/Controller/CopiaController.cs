@@ -18,24 +18,31 @@ namespace AppLocadora.Controller
 
         public List<Copia> Generate(Dictionary<List<Model.Formato>, Model.Credito> param)
         {
-            List<Copia> copias = new List<Copia>();
-            foreach (var copia in param)
+            try
             {
-                foreach (var formato in copia.Key)
-                {
-                    copias.Add(new Copia(copia.Value));
-                }
+                List<Copia> copias = new List<Copia>();
+                param.ToList().ForEach(p => p.Key.ForEach(k => copias.Add(new Copia(p.Value))));
+                return copias;
             }
-
-            return copias;
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public IEnumerable<Copia> SelectAllCopiasByMovie(Filme movie)
         {
-            IQueryable<Filme> query = _database.AsQueryable<Filme>();
-            return (from q in query
-                    where q == movie
-                    select q.Copias).SingleOrDefault();
+            try
+            {
+                IQueryable<Filme> query = _database.AsQueryable<Filme>();
+                return (from q in query
+                        where q == movie
+                        select q.Copias).SingleOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

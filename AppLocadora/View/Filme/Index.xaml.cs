@@ -28,6 +28,7 @@ namespace AppLocadora.View.Filme
 
         private void Refresh()
         {
+            //lbFilmes.ItemsSource = new FilmeController().SelectAll();
             lbFilmes.ItemsSource = new FilmeController().SelectAll<Model.Filme>();
         }
 

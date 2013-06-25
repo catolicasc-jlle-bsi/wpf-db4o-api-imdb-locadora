@@ -12,11 +12,18 @@ namespace AppLocadora.Controller
     {
         public IEnumerable<Cliente> SearchAllClientsByName(string param)
         {
-            IQueryable<Cliente> query = _database.AsQueryable<Cliente>();
-            return (from q in query
-                    where q.Nome.Contains(param)
-                    orderby q.Nome
-                    select q);
+            try
+            {
+                IQueryable<Cliente> query = _database.AsQueryable<Cliente>();
+                return (from q in query
+                        where q.Nome.Contains(param)
+                        orderby q.Nome
+                        select q);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

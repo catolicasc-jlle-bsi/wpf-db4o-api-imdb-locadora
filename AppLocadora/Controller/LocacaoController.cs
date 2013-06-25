@@ -11,6 +11,7 @@ namespace AppLocadora.Controller
 {
     public class LocacaoController : BasicOperations
     {
+        /*
         public bool CopiaDisponivel(Copia copia)
         {
             IQueryable<Locacao> query = _database.AsQueryable<Locacao>();
@@ -26,17 +27,6 @@ namespace AppLocadora.Controller
                     select q).SingleOrDefault() == null;
 
         }
-
-        /*
-        public Dictionary<Model.Filme, List<Model.Copia>> Search(string param)
-        {
-            var allMovies = new FilmeController().SearchAllMoviesByName(param);
-            if (allMovies == null) throw new Exception("Nenhum filme encontrado!");
-
-            Dictionary<Model.Filme, List<Model.Copia>> dicMovies = new Dictionary<Model.Filme, List<Model.Copia>>();
-            allMovies.ToList().ForEach(f => dicMovies.Add(f, new CopiaController().SelectAllCopiasByMovie(f).ToList()));
-            return dicMovies;
-        }*/
-
+        */
     }
 }

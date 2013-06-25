@@ -12,22 +12,36 @@ namespace AppLocadora.Controller
     {
         public List<Genero> Cast(List<string> parameter)
         {
-            List<Genero> temp = new List<Genero>();
-            if (parameter == null) { return temp; };
+            try
+            {
+                List<Genero> temp = new List<Genero>();
+                if (parameter == null) { return temp; };
 
-            parameter.ForEach(p => temp.Add(this.Valid(new Genero() { Descricao = p, })));
-            return temp;
+                parameter.ForEach(p => temp.Add(this.Valid(new Genero() { Descricao = p, })));
+                return temp;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         private Genero Valid(Genero parameter)
         {
-            IQueryable<Genero> query = _database.AsQueryable<Genero>();
+            try
+            {
+                IQueryable<Genero> query = _database.AsQueryable<Genero>();
 
-            var d = (from q in query
-                     where q.Descricao == parameter.Descricao
-                     select q).FirstOrDefault();
+                var d = (from q in query
+                         where q.Descricao == parameter.Descricao
+                         select q).FirstOrDefault();
 
-            return (d != null) ? d : parameter;
+                return (d != null) ? d : parameter;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

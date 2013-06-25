@@ -12,22 +12,35 @@ namespace AppLocadora.Controller
     {
         public List<Roteirista> Cast(List<string> parameter)
         {
-            List<Roteirista> temp = new List<Roteirista>();
-            if (parameter == null) { return temp; };
+            try
+            {
+                List<Roteirista> temp = new List<Roteirista>();
+                if (parameter == null) { return temp; };
 
-            parameter.ForEach(p => temp.Add(this.Valid(new Roteirista() { Nome = p, })));
-            return temp;
+                parameter.ForEach(p => temp.Add(this.Valid(new Roteirista() { Nome = p, })));
+                return temp;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         private Roteirista Valid(Roteirista parameter)
         {
-            IQueryable<Roteirista> query = _database.AsQueryable<Roteirista>();
+            try
+            {
+                IQueryable<Roteirista> query = _database.AsQueryable<Roteirista>();
+                var d = (from q in query
+                         where q.Nome == parameter.Nome
+                         select q).FirstOrDefault();
 
-            var d = (from q in query
-                     where q.Nome == parameter.Nome
-                     select q).FirstOrDefault();
-
-            return (d != null) ? d : parameter;
+                return (d != null) ? d : parameter;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

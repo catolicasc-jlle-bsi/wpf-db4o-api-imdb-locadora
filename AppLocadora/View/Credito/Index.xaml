@@ -5,12 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800">
-    
+
     <Page.Resources>
 
         <DataTemplate x:Key="Template">
             <WrapPanel>
-                <TextBlock Text="{Binding Valor}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Left" Width="200"/>
+                <TextBlock Text="{Binding Descricao}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Left" Width="150"/>
+                <TextBlock Text="{Binding Valor}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center" Width="50"/>
+                <TextBlock Text="{Binding QuantidadeDias}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center" Width="200"/>
+                <TextBlock Text="{Binding Formato}" Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center" Width="150"/>
                 <TextBlock Padding="0" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center" Width="80">
                     <Button Name="btnEditar" Width="60" Content="Editar" Click="btnEditar_Click"/>
                 </TextBlock>
@@ -24,12 +27,15 @@
 
     <Grid>
         <StackPanel Margin="10,0,10,0" Orientation="Vertical">
-            <StackPanel Margin="0,15,0,0" Height="25" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Width="760">
-                <Label Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="200" Background="Gray" Foreground="White" FontWeight="Bold">Valor</Label>
+            <StackPanel Margin="0,15,0,0" Height="25" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" Width="700">
+                <Label Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Background="Gray" Foreground="White" FontWeight="Bold">Descrição</Label>
+                <Label Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="50" Background="Gray" Foreground="White" FontWeight="Bold">Valor</Label>
+                <Label Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="200" Background="Gray" Foreground="White" FontWeight="Bold">Qtde de dias p/ entrega</Label>
+                <Label Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="150" Background="Gray" Foreground="White" FontWeight="Bold">Formato</Label>
                 <Label Padding="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="80" Background="Gray" Foreground="White" FontWeight="Bold"/>
                 <Label Padding="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="80" Background="Gray" Foreground="White" FontWeight="Bold"/>
             </StackPanel>
-            <ListBox Name="lbCreditos" Focusable="False" TabIndex="1" Height="400" ItemsSource="{Binding}" SelectionMode="Single" Width="760" ItemTemplate="{StaticResource Template}" HorizontalAlignment="Center"/>
+            <ListBox Name="lbCreditos" Focusable="False" TabIndex="1" Height="400" ItemsSource="{Binding}" SelectionMode="Single" Width="700" ItemTemplate="{StaticResource Template}" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>

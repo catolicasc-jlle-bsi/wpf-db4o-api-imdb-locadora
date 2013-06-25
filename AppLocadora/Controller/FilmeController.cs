@@ -12,35 +12,110 @@ namespace AppLocadora.Controller
     {
         public Filme Cast(Imdb imdb)
         {
-            if (imdb == null) { throw new Exception("Objeto IMDB está nulo!"); };
+            try
+            {
+                if (imdb == null) { throw new Exception("Objeto IMDB está nulo!"); };
 
-            return
-                new Filme
-                {
-                    Nome = imdb.Title,
-                    Sinopse = imdb.PlotSimple,
-                    AnoLancamento = imdb.Year,
-                    Duracao = imdb.Runtime != null ? imdb.Runtime.FirstOrDefault() : string.Empty,
-                    Generos = new GeneroController().Cast(imdb.Genres),
-                    Diretores = new DiretorController().Cast(imdb.Directors),
-                    Roteiristas = new RoteiristaController().Cast(imdb.Writers),
-                    Atores = new AtorController().Cast(imdb.Actors),
-                    Capa = Cast(imdb.Poster), 
-                };
+                return
+                    new Filme
+                    {
+                        Nome = imdb.Title,
+                        Sinopse = imdb.PlotSimple,
+                        AnoLancamento = imdb.Year,
+                        Duracao = imdb.Runtime != null ? imdb.Runtime.FirstOrDefault() : string.Empty,
+                        Generos = new GeneroController().Cast(imdb.Genres),
+                        Diretores = new DiretorController().Cast(imdb.Directors),
+                        Roteiristas = new RoteiristaController().Cast(imdb.Writers),
+                        Atores = new AtorController().Cast(imdb.Actors),
+                        Capa = Cast(imdb.Poster),
+                    };
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
+
+        /*
+        public IEnumerable<Filme> SelectAll()
+        {
+            try
+            {
+                IQueryable<Filme> query = _database.AsQueryable<Filme>();
+                return (from q in query
+                        select new Filme
+                            {
+                                Nome = q.Nome,
+                                Sinopse = q.Sinopse,
+                                AnoLancamento = q.AnoLancamento,
+                            }).AsEnumerable<Filme>();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        */
+
+        public Filme Single(Filme filme)
+        {
+            try
+            {
+                IQueryable<Filme> query = _database.AsQueryable<Filme>();
+                return (from q in query
+                        where q == filme
+                        select q).SingleOrDefault();
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /*
+        public void Delete(Filme filme)
+        {
+            try
+            {
+                IQueryable<Filme> query = _database.AsQueryable<Filme>();
+                _database.Delete((from q in query
+                                  where q == filme
+                                  select q).SingleOrDefault());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }*/
 
         public IEnumerable<Filme> SearchAllMoviesByName(string param)
         {
-            IQueryable<Filme> query = _database.AsQueryable<Filme>();
-            return (from q in query
-                    where q.Nome.Contains(param)
-                    orderby q.Nome
-                    select q);
+            try
+            {
+                IQueryable<Filme> query = _database.AsQueryable<Filme>();
+                return (from q in query
+                        where q.Nome.Contains(param)
+                        orderby q.Nome
+                        select q);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         private byte[] Cast(string url)
         {
-            return Session.Current.Internet.DownBytes(url);
+            try
+            {
+                return Session.Current.Internet.DownBytes(url);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

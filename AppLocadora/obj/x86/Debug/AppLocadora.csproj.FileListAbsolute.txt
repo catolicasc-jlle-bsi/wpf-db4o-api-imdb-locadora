@@ -73,3 +73,7 @@ C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaD
 C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Filme_List.baml
 C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Filme_Details.g.cs
 C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\View\Locacao\Filme_List.g.cs
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\bin\Debug\WPF_Media_Player.dll
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\bin\Debug\WPF_Media_Player.pdb
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\Resources\Styles.baml
+C:\Users\gabriel.lima\Documents\Visual Studio 2010\Projects\Catolica.TecnologiaDaProgramacaoI.Locadora\AppLocadora\obj\x86\Debug\Resources\Templates.baml

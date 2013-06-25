@@ -26,49 +26,84 @@ namespace AppLocadora.Controller
         /// <param name="imdb"></param>
         public void Save(Imdb imdb)
         {
-            if (String.IsNullOrEmpty(imdb.Title)) { return; }
+            try
+            {
+                if (String.IsNullOrEmpty(imdb.Title)) { return; }
 
-            if (Exists(imdb.ImdbId)) { return; }
+                if (Exists(imdb.ImdbId)) { return; }
 
-            _database.Store(imdb);
+                _database.Store(imdb);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         private bool Exists(string identifier)
         {
-            IQueryable<Imdb> query = _database.AsQueryable<Imdb>();
-            return (from q in query
-                    where q.ImdbId == identifier
-                    select q.ImdbId).Any();
+            try
+            {
+                IQueryable<Imdb> query = _database.AsQueryable<Imdb>();
+                return (from q in query
+                        where q.ImdbId == identifier
+                        select q.ImdbId).Any();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         private Imdb Valid(Imdb parameter)
         {
-            IQueryable<Imdb> query = _database.AsQueryable<Imdb>();
+            try
+            {
+                IQueryable<Imdb> query = _database.AsQueryable<Imdb>();
 
-            var d = (from q in query
-                     where q.ImdbId == parameter.ImdbId
-                     select q).FirstOrDefault();
+                var d = (from q in query
+                         where q.ImdbId == parameter.ImdbId
+                         select q).FirstOrDefault();
 
-            return (d != null) ? d : parameter;
+                return (d != null) ? d : parameter;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public string LastId()
         {
-            IQueryable<Imdb> query = _database.AsQueryable<Imdb>();
-            return query.FirstOrDefault() != null ?
-                (from q in query
-                 orderby q.ImdbId descending
-                 select q.ImdbId).FirstOrDefault() : "0";
+            try
+            {
+                IQueryable<Imdb> query = _database.AsQueryable<Imdb>();
+                return query.FirstOrDefault() != null ?
+                    (from q in query
+                     orderby q.ImdbId descending
+                     select q.ImdbId).FirstOrDefault() : "0";
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public void IntegrateWithDatabase()
         {
-            IQueryable<Imdb> query = _database.AsQueryable<Imdb>();
-            List<Imdb> movies = (from q in query
-                                 where q.Type == "M"
-                                 select q).ToList();
+            try
+            {
+                IQueryable<Imdb> query = _database.AsQueryable<Imdb>();
+                List<Imdb> movies = (from q in query
+                                     where q.Type == "M"
+                                     select q).ToList();
 
-            movies.ForEach(movie => Save(new FilmeController().Cast(movie)));
+                movies.ForEach(movie => Save(new FilmeController().Cast(movie)));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         /*
@@ -93,7 +128,7 @@ namespace AppLocadora.Controller
             {
                 throw new Exception(string.Format("Erro desconhecido. Detalhes: {0}", ex.Message));
             }
-            
+
             if (json.Contains("Film not found")) { throw new Exception("Nenhum filme encontrado com o nome procurado!"); };
 
             try

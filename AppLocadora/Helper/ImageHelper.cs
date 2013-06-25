@@ -20,5 +20,20 @@ namespace AppLocadora.Helper
             image.EndInit();
             return image;
         }
+
+        public byte[] BitmapImageToByte(BitmapImage param)
+        {
+            if (param == null) { throw new Exception("Falha ao carregar a imagem: Imagem inexistente!"); };
+
+            byte[] data;
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(param));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                data = ms.ToArray();
+            }
+            return data;
+        }
     }
 }

@@ -12,27 +12,32 @@ namespace AppLocadora.Controller
     {
         public IEnumerable<Credito> SelectAllByFormato(Formato formato)
         {
-            IQueryable<Credito> query = _database.AsQueryable<Credito>();
-            return (from q in query
-                    where q.Formato == formato
-                    orderby q.Valor
-                    select q);
+            try
+            {
+                IQueryable<Credito> query = _database.AsQueryable<Credito>();
+                return (from q in query
+                        where q.Formato == formato
+                        orderby q.Valor
+                        select q);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public Credito SelectByFormato(Formato formato, Filme movie)
         {
-            var copias = (from c in movie.Copias
-                          where c.Credito.Formato == formato
-                          select c.Credito);
-
-             //movie.Copias.Where(w => w.Credito.Formato == formato).Select(s => s.Credito).SingleOrDefault();
-            return copias.FirstOrDefault();
-            /*
-            IQueryable<Filme> query = _database.AsQueryable<Filme>();
-            var copias = (from q in query
-                          where q == movie && q.Copias.Where(w => w.Credito.Formato 
-                          select q.Copias);
-            copias.Where*/
+            try
+            {
+                return (from c in movie.Copias
+                        where c.Credito.Formato == formato
+                        select c.Credito).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

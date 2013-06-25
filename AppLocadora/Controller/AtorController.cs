@@ -13,22 +13,36 @@ namespace AppLocadora.Controller
     {
         public List<Ator> Cast(List<string> parameter)
         {
-            List<Ator> temp = new List<Ator>();
-            if (parameter == null) { return temp; };
+            try
+            {
+                List<Ator> temp = new List<Ator>();
+                if (parameter == null) { return temp; };
 
-            parameter.ForEach(p => temp.Add(this.Valid(new Ator() { Nome = p, })));
-            return temp;
+                parameter.ForEach(p => temp.Add(this.Valid(new Ator() { Nome = p, })));
+                return temp;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         private Ator Valid(Ator parameter)
         {
-            IQueryable<Ator> query = _database.AsQueryable<Ator>();
+            try
+            {
+                IQueryable<Ator> query = _database.AsQueryable<Ator>();
 
-            var d = (from q in query
-                     where q.Nome == parameter.Nome
-                     select q).FirstOrDefault();
+                var d = (from q in query
+                         where q.Nome == parameter.Nome
+                         select q).FirstOrDefault();
 
-            return (d != null) ? d : parameter;
+                return (d != null) ? d : parameter;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

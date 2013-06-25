@@ -6,6 +6,16 @@
       xmlns:h="clr-namespace:AppLocadora.Helper"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="Resources/Styles.xaml"/>-->
+                <ResourceDictionary Source="../../Resources/Templates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
     <Grid>
         <Border BorderThickness="2" BorderBrush="SteelBlue">
             <StackPanel Height="580" Width="780">
@@ -17,186 +27,219 @@
                 </StackPanel.Background>
                 <Label Background="CadetBlue" Foreground="White" FontSize="12">CADASTRO DE FILME</Label>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <TabControl TabStripPlacement="Top" Margin="0,0,0,10" Height="450">
+                    <TabItem Name="CadastroCliente" Height="25" Width="100" Header="Cadastro">
+                        <TabItem.Content>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0">
-                        <Image Margin="0,10,0,0" Height="180" MouseDown="imgCapa_MouseDown" Name="imgCapa" Width="180" />
-                    </StackPanel>
+                                <StackPanel Grid.Column="0">
+                                    <Image Margin="0,10,0,0" Height="180" MouseDown="imgCapa_MouseDown" Name="imgCapa" Width="180"/>
+                                </StackPanel>
 
-                    <StackPanel Grid.Column="1">
-                        <WrapPanel Height="28" Margin="0,5,0,0" >
-                            <Label Width="105" HorizontalContentAlignment="Right">Nome (*):</Label>
-                            <TextBox Name="tbNome" Width="300">
-                                <TextBox.Text>
-                                    <Binding Path="Nome">
-                                        <Binding.ValidationRules>
-                                            <h:CampoObrigatorio />
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                            <Button Margin="5,0,0,0" Name="btnVerificarIMDB" Width="150" Content="Verificar no IMDB" Click="btnVerificarIMDB_Click"/>
-                        </WrapPanel>
+                                <StackPanel Grid.Column="1">
+                                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                                        <Label Width="105" HorizontalContentAlignment="Right">Nome (*):</Label>
+                                        <TextBox Name="tbNome" Width="300">
+                                            <TextBox.Text>
+                                                <Binding Path="Nome">
+                                                    <Binding.ValidationRules>
+                                                        <h:CampoObrigatorio />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <Button Margin="5,0,0,0" Name="btnVerificarIMDB" Width="150" Content="Verificar no IMDB" Click="btnVerificarIMDB_Click"/>
+                                    </WrapPanel>
 
-                        <WrapPanel Height="100" Margin="0,5,0,0" >
-                            <Label Width="105" HorizontalContentAlignment="Right">Sinopse :</Label>
-                            <TextBox Width="300" AcceptsReturn="True" AcceptsTab="True" Height="95">
-                                <TextBox.Text>
-                                    <Binding Path="Sinopse">
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                        </WrapPanel>
+                                    <WrapPanel Height="100" Margin="0,5,0,0" >
+                                        <Label Width="105" HorizontalContentAlignment="Right">Sinopse :</Label>
+                                        <TextBox Width="300" AcceptsReturn="True" AcceptsTab="True" Height="95">
+                                            <TextBox.Text>
+                                                <Binding Path="Sinopse">
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                    </WrapPanel>
 
-                        <WrapPanel Height="28" Margin="0,5,0,0" >
-                            <Label Width="105" HorizontalContentAlignment="Right" Content="Ano Lançamento :"></Label>
-                            <TextBox Width="60">
-                                <TextBox.Text>
-                                    <Binding Path="AnoLancamento">
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                        </WrapPanel>
+                                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                                        <Label Width="105" HorizontalContentAlignment="Right" Content="Ano Lançamento :"></Label>
+                                        <TextBox Width="60">
+                                            <TextBox.Text>
+                                                <Binding Path="AnoLancamento">
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                    </WrapPanel>
 
-                        <WrapPanel Height="28" Margin="0,5,0,0" >
-                            <Label Width="105" HorizontalContentAlignment="Right">Duração :</Label>
-                            <TextBox Width="60">
-                                <TextBox.Text>
-                                    <Binding Path="Duracao">
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                            <Label Width="105" HorizontalContentAlignment="Right">Censura :</Label>
-                            <ComboBox Name="cbCensura" Width="80" Margin="1" DisplayMemberPath="Classificacao">
-                                <ComboBox.SelectedValue>
-                                    <Binding Path="Censura">
-                                    </Binding>
-                                </ComboBox.SelectedValue>
-                            </ComboBox>
-                        </WrapPanel>
+                                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                                        <Label Width="105" HorizontalContentAlignment="Right">Duração :</Label>
+                                        <TextBox Width="60">
+                                            <TextBox.Text>
+                                                <Binding Path="Duracao">
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <Label Width="105" HorizontalContentAlignment="Right">Censura :</Label>
+                                        <ComboBox Name="cbCensura" Width="80" Margin="1" DisplayMemberPath="Classificacao">
+                                            <ComboBox.SelectedValue>
+                                                <Binding Path="Censura">
+                                                </Binding>
+                                            </ComboBox.SelectedValue>
+                                        </ComboBox>
+                                    </WrapPanel>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Gêneros :</Label>
-                            <ComboBox Grid.Column="1" Grid.Row="0" Margin="2" Name="cbGeneros" SelectionChanged="Generic_SelectionChanged">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <CheckBox Name="cbGenerosItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbGenerosItem_Checked" Unchecked="cbGenerosItem_Checked"/>
-                                            <TextBlock Text="{Binding ObjectData.Descricao}" Width="190" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <TextBlock Grid.Column="1" Grid.Row="0" Name="tbGeneros" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
-                        </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="105"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Gêneros :</Label>
+                                        <ComboBox Grid.Column="1" Grid.Row="0" Margin="2" Name="cbGeneros" SelectionChanged="Generic_SelectionChanged">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <CheckBox Name="cbGenerosItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbGenerosItem_Checked" Unchecked="cbGenerosItem_Checked"/>
+                                                        <TextBlock Text="{Binding ObjectData.Descricao}" Width="190" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <TextBlock Grid.Column="1" Grid.Row="0" Name="tbGeneros" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
+                                    </Grid>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Diretores :</Label>
-                            <ComboBox Name="cbDiretor" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <CheckBox Name="cbDiretorItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbDiretorItem_Checked" Unchecked="cbDiretorItem_Checked"/>
-                                            <TextBlock Text="{Binding ObjectData.Nome}" Width="190" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <TextBlock Grid.Column="1" Grid.Row="0" Name="tbDiretor" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
-                        </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="105"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Diretores :</Label>
+                                        <ComboBox Name="cbDiretor" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <CheckBox Name="cbDiretorItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbDiretorItem_Checked" Unchecked="cbDiretorItem_Checked"/>
+                                                        <TextBlock Text="{Binding ObjectData.Nome}" Width="190" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <TextBlock Grid.Column="1" Grid.Row="0" Name="tbDiretor" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
+                                    </Grid>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Roteiristas :</Label>
-                            <ComboBox Name="cbRoteirista" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <CheckBox Name="cbRoteiristaItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbRoteiristaItem_Checked" Unchecked="cbRoteiristaItem_Checked"/>
-                                            <TextBlock Text="{Binding ObjectData.Nome}" Width="190" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <TextBlock Grid.Column="1" Grid.Row="0" Name="tbRoteirista" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
-                        </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="105"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Roteiristas :</Label>
+                                        <ComboBox Name="cbRoteirista" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <CheckBox Name="cbRoteiristaItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbRoteiristaItem_Checked" Unchecked="cbRoteiristaItem_Checked"/>
+                                                        <TextBlock Text="{Binding ObjectData.Nome}" Width="190" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <TextBlock Grid.Column="1" Grid.Row="0" Name="tbRoteirista" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
+                                    </Grid>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="105"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Atores :</Label>
-                            <ComboBox Name="cbAtor" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <CheckBox Name="cbAtorItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbAtorItem_Checked" Unchecked="cbAtorItem_Checked"/>
-                                            <TextBlock Text="{Binding ObjectData.Nome}" Width="190" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <TextBlock Grid.Column="1" Grid.Row="0" Name="tbAtor" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
-                        </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="105"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Right">Atores :</Label>
+                                        <ComboBox Name="cbAtor" Grid.Column="1" Grid.Row="0" Margin="2" SelectionChanged="Generic_SelectionChanged">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <CheckBox Name="cbAtorItem" IsChecked="{Binding IsSelected}" Width="20" Checked="cbAtorItem_Checked" Unchecked="cbAtorItem_Checked"/>
+                                                        <TextBlock Text="{Binding ObjectData.Nome}" Width="190" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <TextBlock Grid.Column="1" Grid.Row="0" Name="tbAtor" IsHitTestVisible="False" VerticalAlignment="Center" Margin="6,2,6,0" />
+                                    </Grid>
 
-                        <WrapPanel Height="28" Margin="0,5,0,0" >
-                            <Label Width="105" HorizontalContentAlignment="Right">Cópias DVD :</Label>
-                            <TextBox Width="60" Name="tbCopiasDVD">
-                            </TextBox>
-                            <Label Width="105" HorizontalContentAlignment="Right">Crédito :</Label>
-                            <ComboBox Name="cbCreditoDVD" Width="200" Margin="1" DisplayMemberPath="Descricao">
-                                <!--<ComboBox.SelectedValue>
-                                    <Binding Path="Credito">
-                                    </Binding>
-                                </ComboBox.SelectedValue>-->
-                            </ComboBox>
-                        </WrapPanel>
+                                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                                        <Label Width="105" HorizontalContentAlignment="Right">Cópias DVD :</Label>
+                                        <TextBox Width="60" Name="tbCopiasDVD">
+                                        </TextBox>
+                                        <Label Width="105" HorizontalContentAlignment="Right">Crédito :</Label>
+                                        <ComboBox Name="cbCreditoDVD" Width="200" Margin="1" DisplayMemberPath="Descricao">
+                                        </ComboBox>
+                                    </WrapPanel>
 
-                        <WrapPanel Height="28" Margin="0,5,0,0" >
-                            <Label Width="105" HorizontalContentAlignment="Right">Cópias Bluray :</Label>
-                            <TextBox Width="60" Name="tbCopiasBluray">
-                            </TextBox>
-                            <Label Width="105" HorizontalContentAlignment="Right">Crédito :</Label>
-                            <ComboBox Name="cbCreditoBluray" Width="200" Margin="1" DisplayMemberPath="Descricao">
-                                <!--<ComboBox.SelectedValue>
-                                    <Binding Path="Credito">
-                                    </Binding> 
-                                </ComboBox.SelectedValue>-->
-                            </ComboBox>
-                        </WrapPanel>
+                                    <WrapPanel Height="28" Margin="0,5,0,0" >
+                                        <Label Width="105" HorizontalContentAlignment="Right">Cópias Bluray :</Label>
+                                        <TextBox Width="60" Name="tbCopiasBluray">
+                                        </TextBox>
+                                        <Label Width="105" HorizontalContentAlignment="Right">Crédito :</Label>
+                                        <ComboBox Name="cbCreditoBluray" Width="200" Margin="1" DisplayMemberPath="Descricao">
+                                        </ComboBox>
+                                    </WrapPanel>
 
 
-                        <Label Margin="0,2,0,2" FontWeight="Bold">(*)Campos obrigatórios</Label>
-                    </StackPanel>
-                </Grid>
+                                    <Label Margin="0,2,0,2" FontWeight="Bold">(*)Campos obrigatórios</Label>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem.Content>
+                    </TabItem>
+
+                    <TabItem Name="TrailerCliente" Height="20" Width="100" Header="Trailer">
+                        <TabItem.Content>
+                            <Grid x:Name ="grdMain" Background="Transparent">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" x:Name="col0" />
+                                    <ColumnDefinition Width="*" x:Name="col1" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" x:Name="row1" />
+                                    <RowDefinition Height="60" x:Name="row2" />
+                                </Grid.RowDefinitions>
+
+                                <Border x:Name="mediaPlayerBorder" Background="Gray" BorderBrush="Gray" Grid.Row="0" Grid.Column="1" BorderThickness="4,4,4,4" Margin="2,2,5,2" CornerRadius="5,5,5,5" ToolTip="Click here to collapse/expand the video">
+                                    <Button x:Name="btnMediaPlayerMain" Click="btnMediaPlayerMain_Click" Height="Auto" Width="Auto" Template="{StaticResource transparentButtonTemplate}">
+                                        <MediaElement x:Name="mediaPlayerMain" MediaOpened="mediaPlayerMain_MediaOpened" MediaEnded="mediaPlayerMain_MediaEnded"  LoadedBehavior="Manual"   Margin="0,0,0,0" Stretch="Fill"/>
+                                    </Button>
+                                </Border>
+
+                                <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="5,5,5,5" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="4,4,4,4" Margin="10,5,5,10">
+                                    <StackPanel Background="Transparent" Width="Auto" Margin="0,0,0,0" Orientation="Horizontal" Height="Auto">
+                                        <Button x:Name="btnPlay" Click="btnPlay_Click" Width="50" Height="50" Margin="10,-30,0,0" Template="{StaticResource controlButtonTemplate}" FontSize="14" FontWeight="Bold" Foreground="LightGreen" Content="4" FontFamily="Webdings" ToolTip="Play"></Button>
+                                        <Button x:Name="btnPause" Click="btnPause_Click"  Width="40" Height="40" Margin="-15,-50,0,0" Template="{StaticResource controlButtonTemplate}" FontSize="14" FontWeight="Bold" Foreground="Orange" Content=";" FontFamily="Webdings" ToolTip="Pause"></Button>
+                                        <Button x:Name="btnStop" Click="btnStop_Click"  Width="30" Height="30" Margin="-10,-45,0,0" Template="{StaticResource controlButtonTemplate}" FontSize="14" FontWeight="Bold" Foreground="Yellow" Content="&lt;" FontFamily="Webdings" ToolTip="Stop"></Button>
+                                        <TextBlock Foreground="Gray" Margin="5,5,5,5"  VerticalAlignment="Center" FontSize="10">Volume</TextBlock>
+                                        <Slider Name="sliderVolume" Margin="2,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" ValueChanged="ChangeMediaVolume" Width="80" Height="Auto" Minimum="0" Maximum="1" Value="0.5"/>
+
+                                    </StackPanel>
+                                </Border>
+
+                            </Grid>
+                        </TabItem.Content>
+                    </TabItem>
+                </TabControl>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
                     <Button IsDefault="True" TabIndex="13" Name="btnSalvar" Margin="10,5,10,5" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="76" Click="btnSalvar_Click">_Salvar</Button>
